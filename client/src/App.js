@@ -1,23 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import Signup from './Signup';
+import ChallengePage from './ChallengePage';
+import Home from './Home'
+import Login from './Login';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { useContext, useEffect } from 'react';
+import { UserContext } from './context/user';
 
 function App() {
+
+  const [user, setUser] = useContext(UserContext)
+
+  useEffect( () => {
+    fetch(`/me`)
+    .then( res => {
+      if (res.ok){
+        res.json().then(user => setUser(user))
+      }
+      else {
+        console.log("fetch failed")
+    }
+  })},[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Signup />}/>
+          <Route path="/login" element={<Login />}/>
+          <Route path="/home" element={<Home />}/>
+          <Route path="/challenge" element={<ChallengePage />}/>
+        </Routes>
+      </Router>
     </div>
   );
 }
