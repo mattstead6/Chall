@@ -1,0 +1,14 @@
+.video-class {
+    width: 100%;
+    height: 50%;
+    max-height: 200px;
+    object-fit: contain
+}
+
+.profile-pic img {
+    border-radius: 100%;
+    object-fit: cover;
+    width: 70px;
+    height: 70px;
+    margin-left: 1px;
+} 

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
+  # get '/show2', to: 'users#show2'
   resources :posts
   resources :challenges
   resources :users

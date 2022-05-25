@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_18_144932) do
+ActiveRecord::Schema.define(version: 2022_05_23_141515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,9 +44,18 @@ ActiveRecord::Schema.define(version: 2022_05_18_144932) do
   end
 
   create_table "challenges", force: :cascade do |t|
+    t.string "challenge_name"
     t.string "video"
     t.string "challenge_description"
     t.integer "user_id"
+    t.string "category"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -56,6 +65,7 @@ ActiveRecord::Schema.define(version: 2022_05_18_144932) do
     t.integer "challenge_id"
     t.string "caption"
     t.string "video"
+    t.string "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

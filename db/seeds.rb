@@ -7,16 +7,19 @@ User.create(name: "Niall Horan", username: "Niall", password_digest: "nia", bio:
 User.create(name: "Steph Curry", username: "Steph", password_digest: "ste", bio: "3 point god", profile_pic: "https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3975.png&w=350&h=254")
 User.create(name: "Alfonso Ribiero", username: "Alfonso", password_digest: "alf", bio: "Carlton from Fresh Prince", profile_pic: 'https://m.media-amazon.com/images/M/MV5BNTAzNzA3MTA4MV5BMl5BanBnXkFtZTcwNDgxODk1OQ@@._V1_.jpg')
 User.create(name: "Blaire O'Neal", username: "Blaire", password_digest: "bla", bio: "Your favorite golfer and model", profile_pic: 'https://www.golfchannel.com/sites/default/files/styles/full/public/2015/09/09/090815_schoolofgolf_165.jpg?itok=kw0biwZ_')
+User.create(name: "Mark Mudler", username: "Mark", password_digest: "mar", bio: "I play baseball, yes I know it's boring", profile_pic: 'https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_213,q_auto:best/v1/people/150426/headshot/67/current')
 
 
-Challenge.create(user_id: 1, video: "https://res.cloudinary.com/dgx9mftel/video/upload/v1652982339/c7lkpjz4bdqp6bgwxmwx.mp4", challenge_description: "I'm starting this challenge to help with the ALS Foundation. You pour ice cold water on your head and donate to the charity")
-Challenge.create(user_id: 4, video: "https://res.cloudinary.com/dgx9mftel/video/upload/v1652982639/z3vzoknfao10unqq0d38.mp4", challenge_description: "I'm starting this golf challenge! See if you can break a foot by foot glass with a 9 iron from 20 yards away.")
+Challenge.create(challenge_name: "Ice Bucket Challenge", category: "Entertainment & Charity", user_id: 1, video: "https://res.cloudinary.com/dgx9mftel/video/upload/v1652982339/c7lkpjz4bdqp6bgwxmwx.mp4", challenge_description: "I'm starting this challenge to help with the ALS Foundation. You pour ice cold water on your head and donate to the charity")
+Challenge.create(challenge_name: "Glass Golf Challenge", category: "Sport & Entertainment", user_id: 4, video: "https://res.cloudinary.com/dgx9mftel/video/upload/v1652982639/z3vzoknfao10unqq0d38.mp4", challenge_description: "I'm starting this golf challenge! See if you can break a foot by foot glass with a 9 iron from 20 yards away.")
 
 
-Post.create(user_id: 1, challenge_id:1, caption: "this water was colllddd", video:"https://res.cloudinary.com/dgx9mftel/video/upload/v1652973699/gyab8tv7wnjmeft8upp7.mov")
-Post.create(user_id: 2, challenge_id:2, caption: "im a hooper and a golfer these days", video:"https://res.cloudinary.com/dgx9mftel/video/upload/v1652982639/z3vzoknfao10unqq0d38.mp4")
-Post.create(user_id: 3, challenge_id:2, caption: "I'm number 1 as usual", video:"https://res.cloudinary.com/dgx9mftel/video/upload/v1652986074/sevey7xw8wqwcy7vtdqn.mp4")
-Post.create(user_id: 4, challenge_id:2, caption: "Did not quite go as planned", video:"https://res.cloudinary.com/dgx9mftel/video/upload/v1652986716/flangf5rzxpt9fzwgcwe.mp4")
+Post.create(user_id: 1, challenge_id:1, category: "Sport & Entertainment", caption: "this water was colllddd", video:"https://res.cloudinary.com/dgx9mftel/video/upload/v1652973699/gyab8tv7wnjmeft8upp7.mov")
+Post.create(user_id: 2, challenge_id:2, category: "Sport & Entertainment", caption: "im a hooper and a golfer these days", video:"https://res.cloudinary.com/dgx9mftel/video/upload/v1652982639/z3vzoknfao10unqq0d38.mp4")
+Post.create(user_id: 3, challenge_id:2, category: "Sport & Entertainment", caption: "I'm number 1 as usual", video:"https://res.cloudinary.com/dgx9mftel/video/upload/v1652986074/sevey7xw8wqwcy7vtdqn.mp4")
+Post.create(user_id: 4, challenge_id:2, category: "Sport & Entertainment", caption: "Did not quite go as planned", video:"https://res.cloudinary.com/dgx9mftel/video/upload/v1652986716/flangf5rzxpt9fzwgcwe.mp4")
+Post.create(user_id: 5, challenge_id:2, category: "Sport & Entertainment", caption: "Pretty happy with it", video:"https://res.cloudinary.com/dgx9mftel/video/upload/v1653016431/znsyy5yneokbnwrnhkzp.mp4")
+
 
 
 

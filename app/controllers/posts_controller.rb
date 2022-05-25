@@ -6,7 +6,7 @@ class PostsController < ApplicationController
     end
 
     def show
-        post = Post.find(parmas[:id])
+        post = Post.find(params[:id])
         render json: post
     end
 
@@ -16,7 +16,7 @@ class PostsController < ApplicationController
     end
 
     def delete
-        post = Post.find(parmas[:id])
+        post = Post.find(params[:id])
         post.destroy
         head :no_content
     end
