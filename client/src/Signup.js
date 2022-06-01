@@ -1,99 +1,101 @@
-import React, {useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./context/user";
 import './Signup.css'
-import {Form, Row, InputGroup, Button, Col} from 'react-bootstrap'
+import { Form, Row, InputGroup, Button, Col } from 'react-bootstrap'
 import { Formik } from 'formik';
 
 
 
-function Signup(){
+function Signup() {
 
-    let navigateTo = useNavigate()
+  let navigateTo = useNavigate()
 
-    const [formData, setFormData] = useState({
-        username: '',
-        password: '',
-        confirm_password: '',
-        bio: '',
-        profile_pic:'',
-        name: ''
-    })
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    confirm_password: '',
+    bio: '',
+    profile_pic: '',
+    name: ''
+  })
 
-    const [user, setUser] = useContext(UserContext)
-    const [errors, setErrors] = useState([])
-    console.log(formData)
-    
-    function handleFormChange(event){
+  const [user, setUser] = useContext(UserContext)
+  const [errors, setErrors] = useState([])
+  console.log(formData)
+
+  function handleFormChange(event) {
     setFormData({
-        ...formData, 
-        [event.target.name] : event.target.value
+      ...formData,
+      [event.target.name]: event.target.value
     })
-    }
+  }
 
-    function handleSignUpSubmit(e){
-        e.preventDefault()
-        fetch(`/signup`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json"
-            },
-            body: JSON.stringify(
-                formData)
-        })
-        .then( res => 
-            {
-            if(res.ok) {
-                res.json().then(newUser => {
-                    console.log(newUser)
-                    setUser(newUser)
-                    setErrors(null)
-                    navigateTo('/home')
-        
-                })
-            } else {
-                res.json().then(response => {
-                     setErrors(response.errors)
-                     alert(errors[0])
-                    
-                })
-            }
+  function handleSignUpSubmit(e) {
+    e.preventDefault()
+    fetch(`/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(
+        formData)
+    })
+      .then(res => {
+        if (res.ok) {
+          res.json().then(newUser => {
+            console.log(newUser)
+            setUser(newUser)
+            setErrors(null)
+            navigateTo('/home')
+
+          })
+        } else {
+          res.json().then(response => {
+            setErrors(response.errors)
+            alert(errors[0])
+
+          })
         }
-        )
-        .catch( error => console.log(error.message));
-    }
-
-
-
-    function showWidget() {
-
-        let widget = window.cloudinary.createUploadWidget({
-          multiple: false,
-          cloudName: `dgx9mftel`,
-          uploadPreset: `p1rynzxt`
-        },
-    
-          (error, result) => {
-            if (!error && result && result.event === "success") {
-              console.log(result)
-              if (result.info.resource_type === "image") {
-                console.log(result)
-                setFormData({...formData, profile_pic: result.info.secure_url})
-              }
-              else {
-                return alert('Please select a photo')
-              }
-            }
-          });
-        widget.open()
       }
+      )
+      .catch(error => console.log(error.message));
+  }
 
-    return(
 
-<>
-<Formik>       
-     <Form onSubmit={handleSignUpSubmit} >
+
+  function showWidget() {
+
+    let widget = window.cloudinary.createUploadWidget({
+      multiple: false,
+      cloudName: `dgx9mftel`,
+      uploadPreset: `p1rynzxt`
+    },
+
+      (error, result) => {
+        if (!error && result && result.event === "success") {
+          console.log(result)
+          if (result.info.resource_type === "image") {
+            console.log(result)
+            console.log(result.info.secure_url)
+            setFormData({ ...formData, profile_pic: result.info.secure_url })
+          }
+          else {
+            return alert('Please select a photo')
+          }
+        }
+      });
+    widget.open()
+  }
+
+  console.log(user)
+
+  return (
+
+    <>
+      <Formik>
+        <Form onSubmit={handleSignUpSubmit} >
           <Row className="mb-3">
             <Form.Group
               as={Col}
@@ -103,8 +105,8 @@ function Signup(){
             >
               <Form.Label>Name*</Form.Label>
               <Form.Control
-              type="text" value={formData.name} name="name" onChange={handleFormChange}
-              placeholder="Name"
+                type="text" value={formData.name} name="name" onChange={handleFormChange}
+                placeholder="Name"
               />
               <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
             </Form.Group>
@@ -121,9 +123,9 @@ function Signup(){
                 <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                 <Form.Control
                   placeholder="Username"
-                  type="text" 
-                  value={formData.username} 
-                  name="username" 
+                  type="text"
+                  value={formData.username}
+                  name="username"
                   onChange={handleFormChange}
                 />
               </InputGroup>
@@ -139,13 +141,13 @@ function Signup(){
               <Form.Label>Password</Form.Label>
               <Form.Control
                 placeholder="Password"
-                type="text" 
-                value={formData.password} 
-                name="password" 
+                type="text"
+                value={formData.password}
+                name="password"
                 onChange={handleFormChange}
               />
 
-              
+
             </Form.Group>
             <Form.Group
               as={Col}
@@ -153,40 +155,43 @@ function Signup(){
               controlId="validationFormik104"
               className="position-relative"
             >
-                
+
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Confirm Password"
-                value={formData.confirm_password} 
-                name="confirm_password" 
+                value={formData.confirm_password}
+                name="confirm_password"
                 onChange={handleFormChange}
               />
-            
+
             </Form.Group>
-            </Row>
-            <Form.Group
-              as={Col}
-              md="3"
-              controlId="validationFormik105"
-              className="position-relative"
-            >
-            <Form.Label>File</Form.Label>
-            <Form.Control
-              type="file"
-              value={formData.profile_pic} 
-              name="profile_pic" 
+          </Row>
+          <Form.Group
+            as={Col}
+            md="3"
+            controlId="validationFormik105"
+            className="position-relative"
+          >
+            <Button
               onChange={handleFormChange}
+              value={formData.profile_pic}
+              name="profile_pic"
+              onClick={showWidget}
+            >Profile Picture</Button>
+            <Form.Control
+
+
 
             />
-            
-          
+
+
           </Form.Group>
           <Button className="label-form" onClick={() => navigateTo('/login')}>Already have an account</Button>
-          <Button  type="submit">Submit</Button>
+          <Button type="submit">Submit</Button>
         </Form>
-    </Formik>
-{/* <div className="whole-form">
+      </Formik>
+      {/* <div className="whole-form">
 <form onSubmit={handleSignUpSubmit}>
     <div className="label-form">
         <h3>Sign Up</h3>
@@ -218,8 +223,8 @@ function Signup(){
     </form>
     </div> */}
 
-</>
-    )
+    </>
+  )
 }
 
 export default Signup;

@@ -7,6 +7,7 @@ import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 
+
 function PostPage({newChallenge}) {
     const [challenge, setChallenge] = useState(); // start undefined
     const { id } = useParams();
@@ -21,7 +22,6 @@ function PostPage({newChallenge}) {
         challenge_name: newChallenge.challenge_name,
         challenge_id: newChallenge.id,
         user_id: newChallenge.user_id
-
     })
 
     console.log(newChallenge)
@@ -69,11 +69,11 @@ function PostPage({newChallenge}) {
         <Col></Col>
         <Col xs={6}>
         <Card border="primary" style={{marginBottom: "30px"}}>
-      <Card.Header >
+      {/* <Card.Header >
           <div className="profile-pic">
-      <img src={newChallenge.user.profile_pic} alt=''></img>
+      <img src={newChallenge.user.profile_pic} alt=''></img> 
       </div>
-      {newChallenge.user.username}</Card.Header>
+      {newChallenge.user.username}</Card.Header> */}
     
       <Card.Body>
       <video className="video-class" src={newChallenge.video} controls></video>

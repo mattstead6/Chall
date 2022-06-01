@@ -6,6 +6,8 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.string :caption
       t.string :video
       t.string :category
+      t.string :challenge_name
+      t.string :challenge_description
 
       t.timestamps
     end

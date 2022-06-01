@@ -5,21 +5,21 @@ import { UserContext } from "./context/user";
 import PostPage from "./PostPage";
 
 
-function ChallengePage({challengeData, setChallengeData, handleSubmit}) {
+function ChallengePage({newChallenge, newPost,setNewPost, handlePost, setNewChall, newChall}) {
 
   let navigate = useNavigate()
 
   const [user] = useContext(UserContext)
   
   const [videoURL, setVideoURL] = useState("")
-  // const [challengeData, setChallengeData] = useState({
+  // const [newChallenge, setnewChallenge] = useState({
   //   video: '',
   //   challenge_description: '',
   //   category: '',
   //   challenge_name: ''
   // })
 
-  // console.log(challengeData)
+  // console.log(newChallenge)
   // console.log(user)
 
   function showWidget() {
@@ -36,7 +36,8 @@ function ChallengePage({challengeData, setChallengeData, handleSubmit}) {
           if (result.info.resource_type === "video") {
             console.log(result)
             setVideoURL(result.info.secure_url)
-            setChallengeData({...challengeData, video: result.info.secure_url})
+            setNewChall({...newChall, video: result.info.secure_url})
+            setNewPost({...newPost, video: result.info.secure_url})
           }
           else {
             return alert('Please select a video')
@@ -46,21 +47,20 @@ function ChallengePage({challengeData, setChallengeData, handleSubmit}) {
     widget.open()
   }
 
-  function handleDescriptionChange(e) {
-    setChallengeData({...challengeData, challenge_description: e.target.value })
+  function handleChange(e) {
+    setNewChall({...newChall, [e.target.name]: e.target.value})
+    setNewPost({...newPost, [e.target.name]: e.target.value})
+
   }
 
-  function handleChangeCategory(e){
-    setChallengeData({...challengeData, category: e.target.value})
-  }
+  // console.log(newChall)
+ 
 
-  function handleChangeName(e) {
-    setChallengeData({...challengeData, challenge_name: e.target.value})
-  }
+  
 
 
   // function handleSubmit(e) {
-  //   console.log(challengeData)
+  //   console.log(newChallenge)
   //   e.preventDefault()
   //   fetch(`/challenges`, {
   //     method: "POST",
@@ -69,7 +69,7 @@ function ChallengePage({challengeData, setChallengeData, handleSubmit}) {
   //       Accept: "application/json"
   //     },
   //     body: JSON.stringify(
-  //       challengeData)
+  //       newChallenge)
   //   })
   //     .then(res => {
   //       if (res.ok) {
@@ -112,13 +112,13 @@ function ChallengePage({challengeData, setChallengeData, handleSubmit}) {
         <button onClick={showWidget}>Upload Video</button>
       </div>
       {videoURL && <video src={videoURL} controls></video>}
-      <textarea onChange={handleDescriptionChange} placeholder="Description of Challenge"></textarea>
+      <textarea name="challenge_description" onChange={handleChange} placeholder="Description of Challenge"></textarea>
       <div>
       <label> Challenge Name:  
-    <input onChange={handleChangeName} placeholder=""></input>
+    <input name="challenge_name" onChange={handleChange} placeholder=""></input>
       </label>
       </div>
-      <select name="category" onChange={handleChangeCategory}>
+      <select name="category" onChange={handleChange}>
         <option>Select Category</option>
         <option>Entertainment</option>
         <option>Sports</option>
@@ -126,9 +126,10 @@ function ChallengePage({challengeData, setChallengeData, handleSubmit}) {
         <option >Charity</option>
       </select>
       <div>
-      <button onClick={handleSubmit}>Go To Post</button>
-      </div>    </>
-  );
-
+      <textarea name="caption" onChange={handleChange} placeholder="Post to your friends.."></textarea>
+      <button onClick={handlePost}>Post</button>
+      </div>    
+      </>
+  )
 }
 export default ChallengePage;

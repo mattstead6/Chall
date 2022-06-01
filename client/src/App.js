@@ -12,6 +12,15 @@ import HomeContainer from './HomeContainer';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
+import ProfilePage from './ProfilePageContainer';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
 
 function App() {
 
@@ -19,53 +28,103 @@ function App() {
 
   const [user, setUser] = useContext(UserContext)
   const [feed, setFeed] = useState([])
+  const [profileFeed, setProfileFeed] = useState([])
   const [selectedChallenge, setSelectedChallenge] = useState(0)
-  console.log(selectedChallenge)
-  const [challengeData, setChallengeData] = useState({
+
+
+  console.log(feed)
+  // const [challengeData, setChallengeData] = useState({
+  //   video: '',
+  //   challenge_description: '',
+  //   category: '',
+  //   challenge_name: ''
+  // })
+
+  useEffect(() => {
+    fetch(`/me`)
+      .then(res => {
+        if (res.ok) {
+          res.json().then(user => {
+            setNewChall({ ...newChall, user_id: user.id })
+            setNewPost({ ...newPost, user_id: user.id })
+            setUser(user)
+          })
+        }
+        else {
+          console.log("fetch failed")
+        }
+      })
+  }, [])
+
+  // console.log(user.id)
+
+  // STATE FOR A CHALLENGE 
+  const [newChall, setNewChall] = useState({
+    user_id: user.id,
     video: '',
     challenge_description: '',
     category: '',
     challenge_name: ''
   })
 
-  // STATE FOR STARTING A NEW CHALLENGE TREND ON THE CHALLENGEPAGE
-  const [newChallenge, setNewChallenge] = useState({
-    id: 0,
-    user_id: 0,
+
+
+  // STATE FOR A POST ON THE CHALLENGEPAGE
+  const [newPost, setNewPost] = useState({
+    challenge_id: 0,
+    user_id: user.id,
     video: '',
     challenge_description: '',
     category: '',
-    challenge_name: ''
+    challenge_name: '',
+    caption: ''
   })
 
-    // STATE FOR A POST 
-    const [newPost, setNewPost] = useState({
-      id: 0,
-      user_id: 0,
-      video: '',
-      challenge_description: '',
-      category: '',
-      challenge_name: ''
-    })
+  // console.log(newPost)
 
-  function handlePostSubmit(e){
-   fetch(`/posts`, {
-       method: "POST",
-       headers: {
-           "Content-Type": "application/json",
-           Accept: "application/json"
-       },
-       body: JSON.stringify({
-           newPost
-       })
-   })
-   .then( res => res.json())
-   .then( data => console.log(data))
-   .catch( error => console.log(error.message));
-  }
 
-  function handleSubmit(e) {
-    console.log(challengeData)
+
+  // // STATE FOR A POST 
+  // const [newPost, setNewPost] = useState({
+  //   id: 0,
+  //   user_id: 0,
+  //   video: '',
+  //   challenge_description: '',
+  //   category: '',
+  //   challenge_name: ''
+  // })
+
+  // function handlePostSubmit(e){
+  //  fetch(`/posts`, {
+  //      method: "POST",
+  //      headers: {
+  //          "Content-Type": "application/json",
+  //          Accept: "application/json"
+  //      },
+  //      body: JSON.stringify({
+  //          newPost
+  //      })
+  //  })
+  //  .then( res => res.json())
+  //  .then( data => console.log(data))
+  //  .catch( error => console.log(error.message));
+  // }
+
+  // function handleSubmit(e){
+  //   e.preventDefault()
+  //   setNewChallenge(challengeData)
+  //   navigateTo(`/challenges/${challengeData.id}/post/${challengeData.challenge_name.split(' ').join('')}`)
+
+  // }
+
+  // console.log(newChall)
+
+  // function handleViewPost() {
+
+  // }
+
+  // console.log(newPost)
+  function handlePost(e) {
     e.preventDefault()
     fetch(`/challenges`, {
       method: "POST",
@@ -74,74 +133,84 @@ function App() {
         Accept: "application/json"
       },
       body: JSON.stringify(
-        challengeData)
+        newChall
+      )
     })
       .then(res => {
         if (res.ok) {
-          res.json().then(newChallenge => {
-            console.log(newChallenge)
-            // setUser(newUser)
-            setNewChallenge(newChallenge)
-            navigateTo(`/challenges/${newChallenge.id}/post/${challengeData.challenge_name.split(' ').join('')}`)
-
+          res.json().then(chall => {
+            console.log(chall)
+            setNewPost({ ...newPost, challenge_id: chall.id })
           })
         } else {
           res.json().then(response => {
-            //  setErrors(response.errors)
             console.log(response.error)
-
           })
         }
       }
       )
-      .catch(error => console.log(error.message));
+      .then(fetch(`/posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify(
+          newPost
+        )
+      })
+        .then(res => res.json())
+        .then(data => setFeed(...feed, data))
+        .catch(error => console.log(error.message)))
 
   }
-  // const [user, setUser] = useState({});
 
-  useEffect( () => {
-    fetch(`/me`)
-    .then( res => {
-      if (res.ok){
-        res.json().then(user => setUser(user))
-      }
-      else {
-        console.log("fetch failed")
-    }
-  })},[])
-  
 
-  useEffect( () => {
+
+  useEffect(() => {
     fetch(`/posts`)
-    .then( res => res.json())
-    .then( data => setFeed(data))
+      .then(res => res.json())
+      .then(data => {
+        setProfileFeed(data)
+        setFeed(data)
+      })
 
-  },[])
+  }, [])
+
+  // console.log(newPost)
+  // console.log(newChall)
+  console.log(feed)
 
 
   return (
+    <ThemeProvider theme={darkTheme}>
     <div className="App">
-<Navbar bg="dark" variant="dark" expand="lg">
-  <Container>
-    <Navbar.Brand href="#home">Chall</Navbar.Brand>
-    <Nav>
-    <Nav.Link href="/challenge">Submit a Challenge</Nav.Link>
-    <Nav.Link href="/home">Feed</Nav.Link>
-    </Nav>
-  </Container>
-</Navbar>
+      <div className="app-header">
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Container>
+          <Navbar.Brand href="#home">Chall</Navbar.Brand>
+          <Navbar.Brand >{user.username}</Navbar.Brand>
+          <Nav>
+            <Nav.Link href="/challenge">Submit a Challenge</Nav.Link>
+            <Nav.Link href="/home">Feed</Nav.Link>
+            <Nav.Link href={`/users/${user.id}`}>Profile</Nav.Link>
 
+          </Nav>
+        </Container>
+      </Navbar>
+      </div>
 
-
-        <Routes>
-          <Route path="/" element={<Signup />}/>
-          <Route path="/login" element={<Login />}/>
-          <Route path="/home" element={<HomeContainer setSelectedChallenge={setSelectedChallenge} setFeed={setFeed} feed={feed}/>}/>
-          <Route path="/challenge" element={<ChallengePage handleSubmit={handleSubmit} challengeData={challengeData} setChallengeData={setChallengeData}/>}/>
-          <Route path="/challenges/:id/post/:name" element={<PostPage newChallenge={newChallenge}/>}/>
-          <Route path="/challenges/:id/contribute-post" element={<PostPopularChallenge selectedChallenge={selectedChallenge} feed={feed}/>}/>
-        </Routes>
+      <Routes>
+        <Route path="/" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<HomeContainer setProfileFeed={setProfileFeed} setSelectedChallenge={setSelectedChallenge} setFeed={setFeed} feed={feed} />} />
+        <Route path="/challenge" element={<ChallengePage handlePost={handlePost} newPost={newPost} setNewPost={setNewPost} newChall={newChall} setNewChall={setNewChall} />} />
+        <Route path="/challenges/:id/post/:name" element={<PostPage newPost={newPost} />} />
+        <Route path="/challenges/:id/contribute-post/:id" element={<PostPopularChallenge handlePost={handlePost} selectedChallenge={selectedChallenge} feed={feed} setNewChall={setNewChall} newChall={newChall} newPost={newPost} setNewPost={setNewPost} />} />
+        <Route path="/users/:id" element={<ProfilePage />} />
+      </Routes>
     </div>
+    </ThemeProvider>
   );
 }
 
