@@ -2,6 +2,7 @@ import React, {useState, useContext} from "react";
 import Home from "./Home";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./context/user";
+import './Signup.css'
 
 
 function Login(){
@@ -48,13 +49,13 @@ function Login(){
     return (
 <>
 <form onSubmit={handleLoginSubmit}>
-    <label>Username</label>
-    <input type="text" value={formData.username} onChange={handleChangeForm} name="username"></input>
-    <label>Password</label>
-    <input type="text" value={formData.password} onChange={handleChangeForm} name="password"></input>
-    <button>Log in</button>
+    {/* <label >Username</label> */}
+    <input type="text" value={formData.username} onChange={handleChangeForm} name="username" placeholder='Username' ></input>
+    {/* <label>Password</label> */}
+    <input type="text" value={formData.password} onChange={handleChangeForm} name="password" placeholder='Password'></input>
+    <button className='bttn' type='button' >Log in</button>
 </form>
-<button onClick={() => navigateTo('/')}>Back to Sign Up</button>
+<button className='bttn' type='button' onClick={() => navigateTo('/')}>Back to Sign Up</button>
 </>
     )
 }

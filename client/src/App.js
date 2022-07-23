@@ -32,7 +32,8 @@ function App() {
   const [selectedChallenge, setSelectedChallenge] = useState(0)
 
 
-  console.log(feed)
+
+
   // const [challengeData, setChallengeData] = useState({
   //   video: '',
   //   challenge_description: '',
@@ -69,6 +70,7 @@ function App() {
 
 
 
+
   // STATE FOR A POST ON THE CHALLENGEPAGE
   const [newPost, setNewPost] = useState({
     challenge_id: 0,
@@ -77,10 +79,12 @@ function App() {
     challenge_description: '',
     category: '',
     challenge_name: '',
-    caption: ''
+    caption: '',
+    // challenge: newChall
   })
 
-  // console.log(newPost)
+  console.log(newPost)
+
 
 
 
@@ -141,6 +145,8 @@ function App() {
           res.json().then(chall => {
             console.log(chall)
             setNewPost({ ...newPost, challenge_id: chall.id })
+            // setNewPost({ ...newPost, challenge: chall })
+            console.log(newPost)
           })
         } else {
           res.json().then(response => {
@@ -160,17 +166,20 @@ function App() {
         )
       })
         .then(res => res.json())
-        .then(data => setFeed(...feed, data))
+        .then(data => setFeed(data))
+        .then(navigateTo('/home'))
         .catch(error => console.log(error.message)))
 
   }
 
-
+  console.log("the feed is here:", feed)
+  console.log("the new post is here", newPost)
 
   useEffect(() => {
     fetch(`/posts`)
       .then(res => res.json())
       .then(data => {
+        console.log(data)
         setProfileFeed(data)
         setFeed(data)
       })
@@ -184,32 +193,32 @@ function App() {
 
   return (
     <ThemeProvider theme={darkTheme}>
-    <div className="App">
-      <div className="app-header">
-      <Navbar bg="dark" variant="dark" expand="lg">
-        <Container>
-          <Navbar.Brand href="#home">Chall</Navbar.Brand>
-          <Navbar.Brand >{user.username}</Navbar.Brand>
-          <Nav>
-            <Nav.Link href="/challenge">Submit a Challenge</Nav.Link>
-            <Nav.Link href="/home">Feed</Nav.Link>
-            <Nav.Link href={`/users/${user.id}`}>Profile</Nav.Link>
+      <div className="App">
+        <div className="app-header">
+          <Navbar bg="dark" variant="dark" expand="lg">
+            <Container>
+              <Navbar.Brand href="#home">Chall</Navbar.Brand>
+              <Navbar.Brand >{user.username}</Navbar.Brand>
+              <Nav>
+                <Nav.Link href="/challenge">Submit a Challenge</Nav.Link>
+                <Nav.Link href="/home">Feed</Nav.Link>
+                <Nav.Link href={`/users/${user.id}`}>Profile</Nav.Link>
 
-          </Nav>
-        </Container>
-      </Navbar>
+              </Nav>
+            </Container>
+          </Navbar>
+        </div>
+
+        <Routes>
+          <Route path="/" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<HomeContainer setProfileFeed={setProfileFeed} setSelectedChallenge={setSelectedChallenge} setFeed={setFeed} feed={feed} />} />
+          <Route path="/challenge" element={<ChallengePage handlePost={handlePost} newPost={newPost} setNewPost={setNewPost} newChall={newChall} setNewChall={setNewChall} />} />
+          <Route path="/challenges/:id/post/:name" element={<PostPage newPost={newPost} />} />
+          <Route path="/challenges/:id/contribute-post/:id" element={<PostPopularChallenge handlePost={handlePost} selectedChallenge={selectedChallenge} feed={feed} setNewChall={setNewChall} newChall={newChall} newPost={newPost} setNewPost={setNewPost} />} />
+          <Route path="/users/:id" element={<ProfilePage />} />
+        </Routes>
       </div>
-
-      <Routes>
-        <Route path="/" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<HomeContainer setProfileFeed={setProfileFeed} setSelectedChallenge={setSelectedChallenge} setFeed={setFeed} feed={feed} />} />
-        <Route path="/challenge" element={<ChallengePage handlePost={handlePost} newPost={newPost} setNewPost={setNewPost} newChall={newChall} setNewChall={setNewChall} />} />
-        <Route path="/challenges/:id/post/:name" element={<PostPage newPost={newPost} />} />
-        <Route path="/challenges/:id/contribute-post/:id" element={<PostPopularChallenge handlePost={handlePost} selectedChallenge={selectedChallenge} feed={feed} setNewChall={setNewChall} newChall={newChall} newPost={newPost} setNewPost={setNewPost} />} />
-        <Route path="/users/:id" element={<ProfilePage />} />
-      </Routes>
-    </div>
     </ThemeProvider>
   );
 }

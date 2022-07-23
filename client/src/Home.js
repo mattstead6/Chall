@@ -2,19 +2,9 @@ import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "./context/user"
 import { useNavigate } from "react-router-dom";
 import './Home.css'
-import Card from "react-bootstrap/esm/Card";
-import Button from "react-bootstrap/esm/Button";
-import ListGroup from "react-bootstrap/esm/ListGroup";
-import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
-import Modal from "react-bootstrap/esm/Modal";
-import Row from "react-bootstrap/esm/Row";
-import Col from "react-bootstrap/esm/Col";
 import { Avatar } from '@mui/material';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-// import {FontAwesomeIcon} from "@fortawesome/fontawesome-svg-core"
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-function Home({ challengeName, postID, caption, category, video, challengeID, userID, setSelectedChallenge }) {
+function Home({ challengeDescription, challengeName, postID, caption, category, video, challengeID, userID, setSelectedChallenge }) {
 
 
 
@@ -132,24 +122,32 @@ function Home({ challengeName, postID, caption, category, video, challengeID, us
             src={postedUser.profile_pic} />
           {postedUser.username}
         </div>
+        <div className="challenge-and-description">
+          <h3>
+            {challengeName}
+          </h3>
+          <h2 className='chall-description'>
+            {challengeDescription}
+          </h2>
+        </div>
         <div className="see-profile">
-          <Button onClick={handleGoToProfile}>See User Profile</Button>
+          <button className="btn btn-white" onClick={handleGoToProfile}>See User Profile</button>
         </div>
 
-        <Button className="perform" onClick={handleChallenge} variant="primary" style={{ marginLeft: "5px" }}>Perform this challenge</Button>
-        <h3>
-          {challengeName}
-        </h3>
+        <button className="btn btn-white" onClick={handleChallenge} >Perform this challenge</button>
+
         <div>
           <video className="post-vid" src={video} controls></video>
         </div>
-        <strong>{likes?.length}</strong> likes
-        <div className="post-text">
+        <div className='likes'>
+          <strong >{likes?.length}</strong> likes
+        </div>
+        <div className="post-caption">
 
           <strong>{postedUser.username}</strong> {caption}
 
         </div>
-        
+
         {/* <div>
           {category}
         </div> */}
@@ -169,24 +167,21 @@ function Home({ challengeName, postID, caption, category, video, challengeID, us
         </div>
 
 
-        <form className="post-commentbox">
+        <form className="commentbox">
           <input
-            className="post-input"
+            className="add-a-comment"
             type='text'
             placeholder="Add a comment..."
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)} />
-          <button onClick={handleLike}>
-            <FavoriteBorderIcon
-              className="like-button"
-            >Like
-            </FavoriteBorderIcon>
+          <button onClick={handleLike}>Like
+
           </button>
           <button
-            className="post-button"
+            className="comment-button"
             type="submit"
             onClick={handleComment}
-          >Post
+          >Comment
           </button>
         </form>
       </div>

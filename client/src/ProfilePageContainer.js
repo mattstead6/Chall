@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { UserContext } from "./context/user"
 import ProfilePage from "./ProfilePage";
+import './ProfilePageContainer.css'
 
 
 function ProfilePageContainer() {
@@ -36,11 +37,14 @@ function ProfilePageContainer() {
         <>
 
 
-
-            <h1>{user?.name}</h1>
-            <h2>Followers: {user?.followers_count}</h2>
-            <h2>Following: {user?.followers_count}</h2>
-            <Button onClick={handleFollowClick}>Follow</Button>
+            <div >
+                <h1 className="user-name" >{user?.name}</h1>
+            </div>
+            <div >
+                <h4 className="follow-stuff">Followers: {user?.followers_count}</h4>
+                <h4 className="follow-stuff">Following: {user?.followers_count}</h4>
+            </div>
+            <button onClick={handleFollowClick}>Follow</button>
             {user?.posts.map(post =>
                 <ProfilePage
                     key={post.id}

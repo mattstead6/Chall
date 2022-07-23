@@ -1,0 +1,57 @@
+.challenge-container {
+    position: relative;
+    margin: 8% auto;
+    width: 50%;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+    background: black;
+    padding: 0px 0px 5px 15px;
+}
+
+.label-form {
+    display: block;
+    margin: 0px 0px 15px 20px;
+    padding: 8px;
+    /* width: 80%; */
+    /* height: 5%; */
+    /* box-sizing: border-box; */
+    /* border: none; */
+    /* outline: none; */
+    border-bottom: 1px solid #aaa;
+    font-size: 14px;
+}
+
+textarea {
+    width: 50%
+}
+
+.p3element {
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.bttn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100%;
+}
+
+/* 
+input[type=text] {
+    padding: 20px;
+    margin: 30px;
+    border: 0;
+    border-bottom: 1px solid;
+    border-radius: 3px;
+    width: 30%;
+} */
+
+.about-to-post-video {
+    display: block;
+    margin-left: 3%;
+    margin-right: auto;
+    width: 40%;
+}

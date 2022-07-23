@@ -1,0 +1,15 @@
+.user-name {
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: white;
+    text-align: center;
+
+}
+
+.follow-stuff {
+    grid-template-columns: repeat(4, 2fr);
+    text-align: center;
+    color: white;
+}

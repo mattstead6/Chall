@@ -3,14 +3,15 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./context/user";
 import PostPage from "./PostPage";
+import './ChallengePage.css'
 
 
-function ChallengePage({newChallenge, newPost,setNewPost, handlePost, setNewChall, newChall}) {
+function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewChall, newChall }) {
 
   let navigate = useNavigate()
 
   const [user] = useContext(UserContext)
-  
+
   const [videoURL, setVideoURL] = useState("")
   // const [newChallenge, setnewChallenge] = useState({
   //   video: '',
@@ -36,8 +37,8 @@ function ChallengePage({newChallenge, newPost,setNewPost, handlePost, setNewChal
           if (result.info.resource_type === "video") {
             console.log(result)
             setVideoURL(result.info.secure_url)
-            setNewChall({...newChall, video: result.info.secure_url})
-            setNewPost({...newPost, video: result.info.secure_url})
+            setNewChall({ ...newChall, video: result.info.secure_url })
+            setNewPost({ ...newPost, video: result.info.secure_url })
           }
           else {
             return alert('Please select a video')
@@ -48,15 +49,15 @@ function ChallengePage({newChallenge, newPost,setNewPost, handlePost, setNewChal
   }
 
   function handleChange(e) {
-    setNewChall({...newChall, [e.target.name]: e.target.value})
-    setNewPost({...newPost, [e.target.name]: e.target.value})
+    setNewChall({ ...newChall, [e.target.name]: e.target.value })
+    setNewPost({ ...newPost, [e.target.name]: e.target.value })
 
   }
 
   // console.log(newChall)
- 
 
-  
+
+
 
 
   // function handleSubmit(e) {
@@ -96,7 +97,7 @@ function ChallengePage({newChallenge, newPost,setNewPost, handlePost, setNewChal
 
 
   // useEffect( () => {
-  // Axios.get('url', { 
+  // Axios.get('url', {    
 
   //   params: {
   //   limit: 20, offset: 0
@@ -105,31 +106,41 @@ function ChallengePage({newChallenge, newPost,setNewPost, handlePost, setNewChal
 
   return (
     <>
-        <div>
-        <p3>Be the first person to begin a challenge trend! Upload a video, select a category and press Go To Post</p3>
+      <div className='challenge-container'>
+        <div className="label-form">
+          <p3 className='p3element' style={{ color: "white", fontSize: "16px" }}>Start A Challenge Trend</p3>
         </div>
         <div>
-        <button onClick={showWidget}>Upload Video</button>
+          <input type='text' placeholder='Challenge Name' name="challenge_name" onChange={handleChange}></input>
+        </div>
+        <div className="label-form">
+          <button onClick={showWidget}>Upload Video</button>
+        </div>
+        <div >
+          {videoURL && <video className='about-to-post-video' src={videoURL} controls></video>}
+        </div>
+
+        <div className="label-form">
+          <textarea name="challenge_description" onChange={handleChange} placeholder="Description of Challenge"></textarea>
+        </div>
+
+        <div className="label-form">
+          <select name="category" onChange={handleChange}>
+            <option>Select Category</option>
+            <option>Entertainment</option>
+            <option>Sports</option>
+            <option >Music</option>
+            <option >Charity</option>
+          </select>
+        </div>
+        <div className="label-form">
+          <textarea name="caption" onChange={handleChange} placeholder="Post to your friends.."></textarea>
+        </div>
+        <div >
+          <button className="bttn" onClick={handlePost}>Post</button>
+        </div>
       </div>
-      {videoURL && <video src={videoURL} controls></video>}
-      <textarea name="challenge_description" onChange={handleChange} placeholder="Description of Challenge"></textarea>
-      <div>
-      <label> Challenge Name:  
-    <input name="challenge_name" onChange={handleChange} placeholder=""></input>
-      </label>
-      </div>
-      <select name="category" onChange={handleChange}>
-        <option>Select Category</option>
-        <option>Entertainment</option>
-        <option>Sports</option>
-        <option >Music</option>
-        <option >Charity</option>
-      </select>
-      <div>
-      <textarea name="caption" onChange={handleChange} placeholder="Post to your friends.."></textarea>
-      <button onClick={handlePost}>Post</button>
-      </div>    
-      </>
+    </>
   )
 }
 export default ChallengePage;

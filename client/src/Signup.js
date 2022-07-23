@@ -4,6 +4,7 @@ import { UserContext } from "./context/user";
 import './Signup.css'
 import { Form, Row, InputGroup, Button, Col } from 'react-bootstrap'
 import { Formik } from 'formik';
+import { Avatar } from '@mui/material';
 
 
 
@@ -94,135 +95,43 @@ function Signup() {
   return (
 
     <>
-      <Formik>
-        <Form onSubmit={handleSignUpSubmit} >
-          <Row className="mb-3">
-            <Form.Group
-              as={Col}
-              md="4"
-              controlId="validationFormik101"
-              className="position-relative"
-            >
-              <Form.Label>Name*</Form.Label>
-              <Form.Control
-                type="text" value={formData.name} name="name" onChange={handleFormChange}
-                placeholder="Name"
-              />
-              <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group
-              as={Col}
-              md="2"
-              controlId="validationFormik102"
-              className="position-relative"
-            >
-            </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormikUsername2">
-              <Form.Label>Username</Form.Label>
-              <InputGroup hasValidation>
-                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-                <Form.Control
-                  placeholder="Username"
-                  type="text"
-                  value={formData.username}
-                  name="username"
-                  onChange={handleFormChange}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Row>
-          <Row className="mb-3">
-            <Form.Group
-              as={Col}
-              md="6"
-              controlId="validationFormik103"
-              className="position-relative"
-            >
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                placeholder="Password"
-                type="text"
-                value={formData.password}
-                name="password"
-                onChange={handleFormChange}
-              />
-
-
-            </Form.Group>
-            <Form.Group
-              as={Col}
-              md="3"
-              controlId="validationFormik104"
-              className="position-relative"
-            >
-
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Confirm Password"
-                value={formData.confirm_password}
-                name="confirm_password"
-                onChange={handleFormChange}
-              />
-
-            </Form.Group>
-          </Row>
-          <Form.Group
-            as={Col}
-            md="3"
-            controlId="validationFormik105"
-            className="position-relative"
-          >
-            <Button
-              onChange={handleFormChange}
-              value={formData.profile_pic}
-              name="profile_pic"
-              onClick={showWidget}
-            >Profile Picture</Button>
-            <Form.Control
-
-
-
-            />
-
-
-          </Form.Group>
-          <Button className="label-form" onClick={() => navigateTo('/login')}>Already have an account</Button>
-          <Button type="submit">Submit</Button>
-        </Form>
-      </Formik>
-      {/* <div className="whole-form">
+<div className='whole-form'>
 <form onSubmit={handleSignUpSubmit}>
-    <div className="label-form">
-        <h3>Sign Up</h3>
-    </div>  
-    <div className="label-form">   
-        <label>Name*</label>
-        <input type="text" value={formData.name} name="name" onChange={handleFormChange}></input>
-        </div>    
-    <div className="label-form">
-        <label>Username*</label>
-        <input type="text" value={formData.username} name="username" onChange={handleFormChange}></input>
-     </div>   
-    <div className="label-form">    
-        <label>Password*</label>
-        <input type="text" value={formData.password} name="password" onChange={handleFormChange}></input>
-    </div>   
-    <div className="label-form">
-        <label>Confirm Password*</label>
-        <input type="text" value={formData.confirm_password} name="confirm_password" onChange={handleFormChange}></input>
-    </div>    
-        <div className="label-form">   
-        <textarea value={formData.bio} name="bio" onChange={handleFormChange} placeholder="Bio"></textarea>
-        </div>  
-        <div className="label-form">   
-        <button type="button" value={formData.profile_pic} name="profile_pic" onChange={handleFormChange} onClick={showWidget}>Upload Profile Picture</button>
-        </div>  
-        <button className="label-form" onClick={() => navigateTo('/login')}>Already have an account</button>
-        <button className="label-form" >Submit</button> 
-    </form>
-    </div> */}
-
+  <div>
+  <input type='text' placeholder='Name' name='name' value={formData.name} onChange={handleFormChange}/>
+  </div>
+  <div>
+  <input type='text' placeholder='User Name' name='username' value={formData.username} onChange={handleFormChange}/>
+  </div>
+  <div>
+  <input type='text' placeholder='Password' name='password' value={formData.password} onChange={handleFormChange}/>
+  </div>
+  <div>
+  <input type='text' placeholder='Confirm Password' name='confirm_password' value={formData.confirm_password} onChange={handleFormChange}/>
+  </div>
+  <div>
+  <button type='button' onClick={showWidget} onChange={handleFormChange} value={formData.profile_pic} name="profile_pic" >Profile Picture</button>
+  </div>
+  {formData.profile_pic}? <Avatar
+            className="post-avsadfasdfasdfdsatar"
+            alt='profile_pic'
+            src={formData.profile_pic} />
+          : null 
+  <div>
+  <button className='bttn' type='button' onClick={() => navigateTo('/login')}>Already have an account</button>
+  </div>
+  <div>
+  <input className='bttn' type="submit" value="Submit"/>
+  </div>
+  <div>
+  <label>I have read and agree to the terms and conditions 
+  <input type="checkbox" />
+  <span></span>
+</label>
+</div>
+<a href='nba.com'>Terms And Conditions</a>
+</form>
+</div>
     </>
   )
 }
