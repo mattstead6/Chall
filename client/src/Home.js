@@ -24,14 +24,14 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
     fetch(`/comments/by-post-id/${postID}`)
       .then(res => res.json())
       .then(data => setComments(data))
-      .then(console.log(comments));
+    //.then(console.log(comments));
   }
 
   const fetchLikes = () => {
     fetch(`/likes/by-post-id/${postID}`)
       .then(res => res.json())
       .then(data => setLikes(data))
-      .then(console.log(likes));
+    //.then(console.log(likes));
   }
 
   /**
@@ -120,22 +120,25 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
             className="post-avatar"
             alt={postedUser.username}
             src={postedUser.profile_pic} />
-          {postedUser.username}
+          <div className='the-user-name'>{postedUser.username}</div>
         </div>
         <div className="challenge-and-description">
           <h3>
             {challengeName}
           </h3>
+          <h5 className='chal-descrip'>Challenge Description</h5>
           <h2 className='chall-description'>
             {challengeDescription}
           </h2>
         </div>
         <div className="see-profile">
-          <button className="btn btn-white" onClick={handleGoToProfile}>See User Profile</button>
+          <div className="width-btn">
+            <button className="btn btn-white" onClick={handleGoToProfile}>See User Profile</button>
+          </div>
+          <div className="width-btn">
+            <button className="btn btn-white" onClick={handleChallenge} >Perform this challenge</button>
+          </div>
         </div>
-
-        <button className="btn btn-white" onClick={handleChallenge} >Perform this challenge</button>
-
         <div>
           <video className="post-vid" src={video} controls></video>
         </div>
@@ -147,17 +150,6 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
           <strong>{postedUser.username}</strong> {caption}
 
         </div>
-
-        {/* <div>
-          {category}
-        </div> */}
-
-
-
-
-
-
-
         <div className="post-comments">
           {comments?.map((comment) => (
             <p>
@@ -165,7 +157,6 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
             </p>
           ))}
         </div>
-
 
         <form className="commentbox">
           <input

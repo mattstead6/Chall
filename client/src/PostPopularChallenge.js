@@ -74,74 +74,31 @@ function PostPopularChallenge({ handlePost, challengeData, selectedChallenge, ne
   return (
     <>
 
-      <Row>
-        <Col></Col>
-        <Col xs={6}>
-          <Card border="primary" style={{ marginBottom: "30px" }}>
-            <Card.Header >
+      
               <div className="profile-pic">
                 <h1>Origin of Challenge</h1>
                 {/* <img src={originalChallenge.user.profile_pic} alt=''></img> */}
               </div>
               {/* <p>This Challenge was created by: {originalChallenge.user.username}</p> */}
-            </Card.Header>
-
-            <Card.Body>
+            
               <video className="video-class" src={originalChallenge.video} controls></video>
-              <Card.Title>{originalChallenge.category}</Card.Title>
-              <Card.Text>
+              {originalChallenge.category}
+           
                 {originalChallenge.caption}
-              </Card.Text>
-              <Card.Link href="#">
-                <Button variant="primary">Leave a Comment</Button>
-              </Card.Link>
-            </Card.Body>
-            <ListGroup className="list-group-flush">
-              <ListGroupItem>Cras justo odio</ListGroupItem>
-              <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-              <ListGroupItem>Vestibulum at eros</ListGroupItem>
-            </ListGroup>
-          </Card >
+    
+           Leave a Comment
 
-        </Col>
-        <Col></Col>
-
-      </Row>
-
-
-      <Row>
-        <Col></Col>
-        <Col xs={6}>
-          <Card border="primary" style={{ marginBottom: "30px" }}>
-            <Card.Header >
               <div className="profile-pic">
                 <h1>Selected Challenge</h1>
                 {/* <img src={originalChallenge.user.profile_pic} alt=''></img> */}
               </div>
               {/* <p>This Challenge was created by: {originalChallenge.user.username}</p> */}
-            </Card.Header>
-
-            <Card.Body>
+     
               <video className="video-class" src={displayClickedChallenge.video} controls></video>
-              <Card.Title>{displayClickedChallenge.category}</Card.Title>
-              <Card.Text>
+   {displayClickedChallenge.category}
+        
                 {displayClickedChallenge.caption}
-              </Card.Text>
-              <Card.Link href="#">
-                <Button variant="primary">Leave a Comment</Button>
-              </Card.Link>
-            </Card.Body>
-            <ListGroup className="list-group-flush">
-              <ListGroupItem>Cras justo odio</ListGroupItem>
-              <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-              <ListGroupItem>Vestibulum at eros</ListGroupItem>
-            </ListGroup>
-          </Card >
-
-        </Col>
-        <Col></Col>
-
-      </Row>
+       Leave a Comment
 
       <div>
         <p3>Be the first person to begin a challenge trend! Upload a video, select a category and press Go To Post</p3>
@@ -167,7 +124,7 @@ function PostPopularChallenge({ handlePost, challengeData, selectedChallenge, ne
         <textarea name="caption" onChange={handleChange} placeholder="Post to your friends.."></textarea>
         <button onClick={handlePost}>Post</button>
       </div>
-      {/* 
+      {/* `
       <form  >
         <textarea name="challenge_description" placeholder="Post to your friends.."></textarea>
         <button>POST</button>

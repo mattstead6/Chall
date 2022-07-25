@@ -12,7 +12,7 @@ function HomeContainer({ feed, setFeed, setSelectedChallenge, setProfileFeed }) 
 
     // console.log(user)
 
-    console.log(feed)
+    //console.log(feed)
     return (
         <>
             <Container className="app-posts">

@@ -23,7 +23,7 @@ function Signup() {
 
   const [user, setUser] = useContext(UserContext)
   const [errors, setErrors] = useState([])
-  console.log(formData)
+  //console.log(formData)
 
   function handleFormChange(event) {
     setFormData({
@@ -46,7 +46,7 @@ function Signup() {
       .then(res => {
         if (res.ok) {
           res.json().then(newUser => {
-            console.log(newUser)
+            //console.log(newUser)
             setUser(newUser)
             setErrors(null)
             navigateTo('/home')
@@ -90,7 +90,7 @@ function Signup() {
     widget.open()
   }
 
-  console.log(user)
+  //console.log(user)
 
   return (
 

@@ -57,7 +57,7 @@ function App() {
       })
   }, [])
 
-  // console.log(user.id)
+
 
   // STATE FOR A CHALLENGE 
   const [newChall, setNewChall] = useState({
@@ -83,7 +83,7 @@ function App() {
     // challenge: newChall
   })
 
-  console.log(newPost)
+  //console.log(newPost)
 
 
 
@@ -143,10 +143,10 @@ function App() {
       .then(res => {
         if (res.ok) {
           res.json().then(chall => {
-            console.log(chall)
+            //(chall)
             setNewPost({ ...newPost, challenge_id: chall.id })
             // setNewPost({ ...newPost, challenge: chall })
-            console.log(newPost)
+            //console.log(newPost)
           })
         } else {
           res.json().then(response => {
@@ -172,14 +172,14 @@ function App() {
 
   }
 
-  console.log("the feed is here:", feed)
-  console.log("the new post is here", newPost)
+  //console.log("the feed is here:", feed)
+  //console.log("the new post is here", newPost)
 
   useEffect(() => {
     fetch(`/posts`)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
+        //console.log(data)
         setProfileFeed(data)
         setFeed(data)
       })

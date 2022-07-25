@@ -25,6 +25,11 @@ class UsersController < ApplicationController
         render json: user
     end
 
+    def show3
+      user = User.find(params[:id])
+      render json: user.posts
+  end
+
     # SIGNING UP
 
     def create

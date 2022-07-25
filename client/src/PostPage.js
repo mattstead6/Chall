@@ -12,7 +12,7 @@ function PostPage({newChallenge}) {
     const [challenge, setChallenge] = useState(); // start undefined
     const { id } = useParams();
 
-    console.log(id)
+    //console.log(id)
 
     const [postData, setPostData] = useState({
         video: newChallenge.video,
@@ -24,7 +24,7 @@ function PostPage({newChallenge}) {
         user_id: newChallenge.user_id
     })
 
-    console.log(newChallenge)
+    //console.log(newChallenge)
 
 
     useEffect(() => {

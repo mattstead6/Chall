@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
   get '/show2/:id', to: 'users#show2'
+  get '/show3/:id', to: 'users#show3'
   resources :posts
   resources :challenges
   resources :users
