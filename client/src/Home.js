@@ -130,6 +130,9 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
           <h2 className='chall-description'>
             {challengeDescription}
           </h2>
+
+
+
         </div>
         <div className="see-profile">
           <div className="width-btn">
@@ -139,9 +142,16 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
             <button className="btn btn-white" onClick={handleChallenge} >Perform this challenge</button>
           </div>
         </div>
+
+
+
+
         <div>
           <video className="post-vid" src={video} controls></video>
         </div>
+
+
+        
         <div className='likes'>
           <strong >{likes?.length}</strong> likes
         </div>

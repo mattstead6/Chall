@@ -1,8 +1,7 @@
-.profile-pic {}
+/* .profile-pic {}
 
 .post {
     background-color: black;
-    /* max-width: 600px; */
     border: 2px solid lightgray;
     margin-bottom: 45px;
     border-radius: 25px;
@@ -11,7 +10,7 @@
 
 
 .post-vid {
-    /* width: 100%; */
+
     max-height: 600px;
     object-fit: contain;
     color: #fff;
@@ -20,7 +19,6 @@
 
 .post-header {
     display: flex;
-    /* align-items: center; */
     padding: 20px 10px;
     color: #fff;
     font-family: 'Montserrat', sans-serif;
@@ -32,34 +30,11 @@
     font-weight: 700;
     letter-spacing: 1px;
     color: #fff;
-    /* border:solid 2px #fff; */
 
 }
 
 
-/* WHY IS THIS BELOW CHANGING THE FEED */
 
-/* h3 {
-    padding: 12px 18px;
-    font-size: 12px;
-    line-height: 19px;
-    text-transform: uppercase;
-    font-family: 'Montserrat', sans-serif; font-weight:700;
-    letter-spacing: 1px;
-    color: #fff;
-}
-.chall-description {
-    padding: 12px 18px;
-    font-size: 13px;
-    line-height: 19px;
-    font-family: 'Montserrat', sans-serif; font-weight:700;
-    letter-spacing: 1px;
-    color: #fff;
-}
-
-.challenge-and-description  {
-    border-bottom:solid 2px #fff 
-} */
 
 
 .likes {
@@ -74,11 +49,6 @@
     margin-left: 0.5em;
 }
 
-.commentbox {
-    /* display: flex; */
-    /* margin-top: 10px; */
-
-}
 
 .add-a-comment {
     flex: 1;
@@ -100,4 +70,4 @@
     max-height: 9.5rem;
     color: #fff;
     overflow: scroll;
-}
+} */

@@ -16,7 +16,7 @@ function HomeContainer({ feed, setFeed, setSelectedChallenge, setProfileFeed }) 
     return (
         <>
             <Container className="app-posts">
-                {feed.map((post) => <Home challengeDescription={post.challenge.challenge_description} challengeName={post.challenge.challenge_name}comments={post.comments} postID={post.id} setProfileFeed={setProfileFeed} setSelectedChallenge={setSelectedChallenge} key={post.id} caption={post.caption} category={post.category} video={post.video} challengeID={post.challenge_id} userID={post.user_id} />)}
+                {feed.map((post) => <Home challengeDescription={post.challenge.challenge_description} challengeName={post.challenge.challenge_name} comments={post.comments} postID={post.id} setProfileFeed={setProfileFeed} setSelectedChallenge={setSelectedChallenge} key={post.id} caption={post.caption} category={post.category} video={post.video} challengeID={post.challenge_id} userID={post.user_id} />)}
             </Container>
         </>
     )

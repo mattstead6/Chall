@@ -4,7 +4,8 @@ import { Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { UserContext } from "./context/user"
 import ProfilePage from "./ProfilePage";
-import './ProfilePageContainer.css'
+// import './ProfilePageContainer.css'
+import './HomeContainer.css'
 import { Avatar } from '@mui/material';
 
 
@@ -15,7 +16,9 @@ function ProfilePageContainer() {
 
 
 
-    // console.log('user:', user);
+    // console.log('persons profile im on user-ID:', user.id);
+    // console.log(`logged in persons id:`, loggedInUser.id)
+
     useEffect(() => {
         fetch(`/show2/${id}`)
             .then(resp => resp.json())
@@ -50,31 +53,36 @@ function ProfilePageContainer() {
 
 
             <div className="profile-container" >
-                <Avatar
-                    alt='profile-pic'
-                    src={user?.profile_pic} />
-                <h1 className="user-name" >{user?.name}</h1>
 
-                <div >
+                <h1 className="user-name" >
+                    <Avatar
+                        alt='profile-pic'
+                        src={user?.profile_pic} />
+                    {user?.name}</h1>
+
+                <div className='follow-container'>
                     <h4 className="follow-stuff">Followers: {user?.followers_count}</h4>
                     <h4 className="follow-stuff">Following: {user?.following_count}</h4>
                 </div>
-                <button onClick={handleFollowClick}>Follow</button>
+                {loggedInUser?.id === user?.id ? <h4 style={{ color: "white" }}>Your Posts</h4> :
+                    <button onClick={handleFollowClick}>Follow</button>}
             </div>
             {console.log('user is:', user)}
-            {user?.posts.map(post =>
-                <ProfilePage
-                    key={post.challenge_id}
-                    caption={post.caption}
-                    category={post.category}
-                    video={post.video}
-                    user={user}
-                    challengeName={post.challenge.challenge_name}
-                    challengeDescription={post.challenge.challenge_description}
-                    postID={post.id}
-                />
+            <div className="app-posts">
+                {user?.posts.map(post =>
+                    <ProfilePage
+                        key={post.challenge_id}
+                        caption={post.caption}
+                        category={post.category}
+                        video={post.video}
+                        user={user}
+                        challengeName={post.challenge.challenge_name}
+                        challengeDescription={post.challenge.challenge_description}
+                        postID={post.id}
+                    />
 
-            )}
+                )}
+            </div>
         </>
     )
 }

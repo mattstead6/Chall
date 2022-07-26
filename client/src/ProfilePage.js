@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "./context/user"
-import './ProfilePage.css'
-// import './Home.css'
+// import './ProfilePage.css'
+import './Home.css'
 
 
 
@@ -100,23 +100,32 @@ function ProfilePage({ video, caption, category, user, challengeName, challengeD
       <div className="post">
         <div className='post-header'>
           <div className="challenge-and-description">
+         
+            <div className='"challenge-and-description"'>
             <h3>
               {challengeName}
             </h3>
+            <h5 className='chal-descrip'>Challenge Description</h5>
             <h2 className='chall-description'>
-              {challengeDescription}
-            </h2>
-            <h4>
+            {challengeDescription}
+          </h2>
+            </div>
+          
+            {/* <h4>
               {category}
-            </h4>
+            </h4> */}
           </div>
         </div>
-        <video className="post-vid" src={video} controls></video>
-        <h3>
-          {caption}
-        </h3>
 
-      </div>
+
+        <div>
+        <video className="post-vid" src={video} controls></video>
+        </div>
+        {/* <h3>
+          {caption}
+        </h3> */}
+
+     
 
       <div className='likes'>
         <strong >{likes?.length}</strong> likes
@@ -153,6 +162,7 @@ function ProfilePage({ video, caption, category, user, challengeName, challengeD
         >Comment
         </button>
       </form>
+      </div>
     </>
   )
 }
