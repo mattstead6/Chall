@@ -74,31 +74,31 @@ function PostPopularChallenge({ handlePost, challengeData, selectedChallenge, ne
   return (
     <>
 
-      
-              <div className="profile-pic">
-                <h1>Origin of Challenge</h1>
-                {/* <img src={originalChallenge.user.profile_pic} alt=''></img> */}
-              </div>
-              {/* <p>This Challenge was created by: {originalChallenge.user.username}</p> */}
-            
-              <video className="video-class" src={originalChallenge.video} controls></video>
-              {originalChallenge.category}
-           
-                {originalChallenge.caption}
-    
-           Leave a Comment
 
-              <div className="profile-pic">
-                <h1>Selected Challenge</h1>
-                {/* <img src={originalChallenge.user.profile_pic} alt=''></img> */}
-              </div>
-              {/* <p>This Challenge was created by: {originalChallenge.user.username}</p> */}
-     
-              <video className="video-class" src={displayClickedChallenge.video} controls></video>
-   {displayClickedChallenge.category}
-        
-                {displayClickedChallenge.caption}
-       Leave a Comment
+      <div className="profile-pic">
+        <h1>Origin of Challenge</h1>
+        <img src={originalChallenge.user.profile_pic} alt=''></img>
+      </div>
+      <p>This Challenge was created by: {originalChallenge.user.username}</p>
+
+      <video className="video-class" src={originalChallenge.video} controls></video>
+      {originalChallenge.category}
+
+      {originalChallenge.caption}
+
+      Leave a Comment
+
+      <div className="profile-pic">
+        <h1>Selected Challenge</h1>
+        {/* <img src={originalChallenge.user.profile_pic} alt=''></img> */}
+      </div>
+      <p>This Challenge was created by: {originalChallenge.user.username}</p>
+
+      <video className="video-class" src={displayClickedChallenge.video} controls></video>
+      {displayClickedChallenge.category}
+
+      {displayClickedChallenge.caption}
+      Leave a Comment
 
       <div>
         <p3>Be the first person to begin a challenge trend! Upload a video, select a category and press Go To Post</p3>

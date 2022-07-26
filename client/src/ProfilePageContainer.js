@@ -57,7 +57,7 @@ function ProfilePageContainer() {
 
                 <div >
                     <h4 className="follow-stuff">Followers: {user?.followers_count}</h4>
-                    <h4 className="follow-stuff">Following: {user?.followers_count}</h4>
+                    <h4 className="follow-stuff">Following: {user?.following_count}</h4>
                 </div>
                 <button onClick={handleFollowClick}>Follow</button>
             </div>
@@ -71,7 +71,7 @@ function ProfilePageContainer() {
                     user={user}
                     challengeName={post.challenge.challenge_name}
                     challengeDescription={post.challenge.challenge_description}
-                    postID ={post.id}
+                    postID={post.id}
                 />
 
             )}

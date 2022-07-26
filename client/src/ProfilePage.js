@@ -19,14 +19,14 @@ function ProfilePage({ video, caption, category, user, challengeName, challengeD
     fetch(`/comments/by-post-id/${postID}`)
       .then(res => res.json())
       .then(data => setComments(data))
-      //.then(console.log(comments));
+    //.then(console.log(comments));
   }
 
   const fetchLikes = () => {
     fetch(`/likes/by-post-id/${postID}`)
       .then(res => res.json())
       .then(data => setLikes(data))
-      //.then(console.log(likes));
+    //.then(console.log(likes));
   }
 
   /**
@@ -90,6 +90,7 @@ function ProfilePage({ video, caption, category, user, challengeName, challengeD
       .catch(error => console.log(error.message));
   }
 
+  // console.log(comments.length)
 
 
   return (
@@ -118,38 +119,40 @@ function ProfilePage({ video, caption, category, user, challengeName, challengeD
       </div>
 
       <div className='likes'>
-          <strong >{likes?.length}</strong> likes
-        </div>
-        <div className="post-caption">
+        <strong >{likes?.length}</strong> likes
+      </div>
+      <div className="post-caption">
+        <strong>{user.username}</strong> {caption}
+      </div>
+      <div>
 
-          <strong>{user.username}</strong> {caption}
+      </div>
+      <div className="post-comments">
+        {/* <p>View all {comments.length}</p> */}
+        {comments?.map((comment) => (
+          <p>
+            <strong>{comment.user.username}</strong> {comment.actual_comment}
+          </p>
+        ))}
+      </div>
 
-        </div>
-        <div className="post-comments">
-          {comments?.map((comment) => (
-            <p>
-              <strong>{comment.user.username}</strong> {comment.actual_comment}
-            </p>
-          ))}
-        </div>
+      <form className="commentbox">
+        <input
+          className="add-a-comment"
+          type='text'
+          placeholder="Add a comment..."
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)} />
+        <button onClick={handleLike}>Like
 
-        <form className="commentbox">
-          <input
-            className="add-a-comment"
-            type='text'
-            placeholder="Add a comment..."
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)} />
-          <button onClick={handleLike}>Like
-
-          </button>
-          <button
-            className="comment-button"
-            type="submit"
-            onClick={handleComment}
-          >Comment
-          </button>
-        </form>
+        </button>
+        <button
+          className="comment-button"
+          type="submit"
+          onClick={handleComment}
+        >Comment
+        </button>
+      </form>
     </>
   )
 }

@@ -70,7 +70,6 @@ function App() {
 
 
 
-
   // STATE FOR A POST ON THE CHALLENGEPAGE
   const [newPost, setNewPost] = useState({
     challenge_id: 0,
@@ -80,7 +79,7 @@ function App() {
     category: '',
     challenge_name: '',
     caption: '',
-    // challenge: newChall
+    //challenge: newChall
   })
 
   //console.log(newPost)
@@ -142,33 +141,37 @@ function App() {
     })
       .then(res => {
         if (res.ok) {
-          res.json().then(chall => {
+          return res.json().then(chall => {
             //(chall)
-            setNewPost({ ...newPost, challenge_id: chall.id })
+            const updatedPost = { ...newPost, challenge_id: chall.id }
+            setNewPost(updatedPost)
+            return updatedPost
             // setNewPost({ ...newPost, challenge: chall })
             //console.log(newPost)
           })
         } else {
-          res.json().then(response => {
+          return res.json().then(response => {
             console.log(response.error)
           })
         }
       }
       )
-      .then(fetch(`/posts`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify(
-          newPost
-        )
+      .then((updatedPost) => {
+        return fetch(`/posts`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify(
+            updatedPost
+          )
+        })
       })
-        .then(res => res.json())
-        .then(data => setFeed(data))
-        .then(navigateTo('/home'))
-        .catch(error => console.log(error.message)))
+      .then(res => res.json())
+      .then(data => setFeed([...feed, data]))
+      .then(() => navigateTo('/home'))
+      .catch(error => console.error(error))
 
   }
 

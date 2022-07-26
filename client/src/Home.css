@@ -3,6 +3,8 @@
     /* max-width: 600px; */
     border: 2px solid lightgray;
     margin-bottom: 45px;
+    border-radius: 25px;
+    width: 50em;
 }
 
 .post-vid {
