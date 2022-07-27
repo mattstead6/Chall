@@ -191,7 +191,7 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
           </select>
         </div>
         <div className="labelss">
-          <button className='nom-friend'onClick={handleFindFriends} color="secondary">Nominate Friends</button>
+          <button className='nom-friend' onClick={handleFindFriends} color="secondary">Nominate Friends</button>
         </div>
         <div className='nominated-user'>
           {selectedNoms !== '' ? <p>You Selected {selectedNoms}</p> : null}
