@@ -12,6 +12,12 @@ class LikesController < ApplicationController
         render json: post.likes
     end
 
+    def destroy
+        like = Like.find(params[:id])
+        like.delete
+        head :no_content
+    end
+
     private
 
     def like_params

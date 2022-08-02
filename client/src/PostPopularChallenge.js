@@ -6,6 +6,8 @@ import ListGroup from "react-bootstrap/esm/ListGroup";
 import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
+import ChallengeBrief from './ChallengeBrief'
+import ChallengePage from "./ChallengePage";
 
 
 function PostPopularChallenge({ handlePost, challengeData, selectedChallenge, newChall, newPost, setNewChall, setNewPost }) {
@@ -68,67 +70,56 @@ function PostPopularChallenge({ handlePost, challengeData, selectedChallenge, ne
     widget.open()
   }
 
+  console.log(displayClickedChallenge)
 
-
-
+  const dc = displayClickedChallenge.challenge
   return (
     <>
 
 
       <div className="profile-pic">
-        <h1>Origin of Challenge</h1>
-        <img src={originalChallenge.user.profile_pic} alt=''></img>
-      </div>
-      <p>This Challenge was created by: {originalChallenge.user.username}</p>
 
-      <video className="video-class" src={originalChallenge.video} controls></video>
-      {originalChallenge.category}
+        {/* <img src={originalChallenge.user.profile_pic} alt=''></img> */}
+      </div>
+      {/* <p>This Challenge was created by: {originalChallenge.user.username}</p> */}
+      <div className='challenge-headers'>
+        {/* <h1>Origin of Challenge</h1>
+        <h1>Selected Challenge</h1> */}
+      </div>
+      <div className="previous-challenges">
+
+        <ChallengeBrief video={originalChallenge.video} challengeName={originalChallenge.challenge_name} challengeDescription={originalChallenge.challenge_description}>
+          <h2 style={{ color: "white" }}>Challenge Created By</h2>
+        </ChallengeBrief>
+        <ChallengeBrief video={displayClickedChallenge.video} challengeName={dc?.challenge_name} challengeDescription={dc?.challenge_description}>
+          <h2 style={{ color: "white" }}>Challenge Selected</h2>
+        </ChallengeBrief>
+      </div>
+      <h1 className='contribute-to-chall'>Contribute to this Chall</h1>
+      {/* {originalChallenge.category}
 
       {originalChallenge.caption}
 
-      Leave a Comment
+      Leave a Comment */}
 
       <div className="profile-pic">
-        <h1>Selected Challenge</h1>
+
         {/* <img src={originalChallenge.user.profile_pic} alt=''></img> */}
       </div>
-      <p>This Challenge was created by: {originalChallenge.user.username}</p>
+      {/* <p>This Challenge was created by: {originalChallenge.user.username}</p> */}
 
-      <video className="video-class" src={displayClickedChallenge.video} controls></video>
-      {displayClickedChallenge.category}
+      {/* {displayClickedChallenge.category}
 
       {displayClickedChallenge.caption}
-      Leave a Comment
+      Leave a Comment */}
 
-      <div>
-        <p3>Be the first person to begin a challenge trend! Upload a video, select a category and press Go To Post</p3>
-      </div>
-      <div>
-        <button onClick={showWidget}>Upload Video</button>
-      </div>
-      {videoURL && <video src={videoURL} controls></video>}
-      <textarea name="challenge_description" onChange={handleChange} placeholder="Description of Challenge"></textarea>
-      <div>
-        <label> Challenge Name:
-          <input name="challenge_name" onChange={handleChange} placeholder=""></input>
-        </label>
-      </div>
-      <select name="category" onChange={handleChange}>
-        <option>Select Category</option>
-        <option>Entertainment</option>
-        <option>Sports</option>
-        <option >Music</option>
-        <option >Charity</option>
-      </select>
-      <div>
-        <textarea name="caption" onChange={handleChange} placeholder="Post to your friends.."></textarea>
-        <button onClick={handlePost}>Post</button>
-      </div>
-      {/* `
-      <form  >
-        <textarea name="challenge_description" placeholder="Post to your friends.."></textarea>
-        <button>POST</button>
-      </form> */}
+      <ChallengePage>
+
+        {/* CAN YOU TAKE AWAY INSTEAD OF ADD THINGS TO CHILD COMPONENTS? */}
+
+      </ChallengePage>
+
+
 
     </>
   )

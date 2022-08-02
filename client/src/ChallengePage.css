@@ -1,10 +1,10 @@
 .challenge-container {
     position: relative;
-    margin: 8% auto;
+    margin: 3% auto;
     width: 50%;
     box-shadow: 0 2px 16px #e9ecef;
     background: black;
-    padding: 0px 0px 5px 15px;
+    padding: 0px 0px 20px 0px;
 }
 
 .label-form {
@@ -49,7 +49,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 100%;
+
 }
 
 /* 

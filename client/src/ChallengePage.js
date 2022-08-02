@@ -11,6 +11,7 @@ import './ChallengePage.css'
 
 
 
+
 function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewChall, newChall }) {
 
   let navigate = useNavigate()

@@ -3,9 +3,17 @@
     border: 2px solid lightgray;
     margin-bottom: 45px;
     border-radius: 25px;
-    /* width: 50em; */
-    padding-left: 15em;
-    padding-right: 15em;
+    margin-left: 15em;
+    margin-right: 15em;
+    padding: 14px;
+}
+
+.previous-challenges {
+    display: flex
+}
+
+.previous-challenges .challenge-and-description {
+    padding: 3em
 }
 
 .post-vid {
@@ -51,7 +59,16 @@
 
 .the-user-name {
     padding-top: 1em;
-    color: yellow
+    color: white
+}
+
+.contribute-to-chall {
+    color: white;
+    text-align: center;
+}
+
+.challenge-headers {
+    display: flex;
 }
 
 .post-avatar {
@@ -60,11 +77,12 @@
 
 .likes {
     color: #fff;
+    padding: 0.7em
 }
 
 .post-caption {
     font-weight: 2px;
-    padding: 10px;
+    padding: 5px;
     color: #fff;
 }
 
@@ -74,9 +92,16 @@
 
 }
 
+.heart-and-likes {
+    display: flex;
+    justify-content: space-between;
+}
+
 .add-a-comment {
+    /* display: flex; */
     flex: 1;
     border: none;
+    width: 90%;
     padding: 10px;
     border-top: 1px solid lightgray
 }
@@ -92,6 +117,8 @@
 .post-comments {
     padding: 5px;
     color: #fff;
+    max-height: 3em;
+    overflow: hidden;
     /* display: left */
 }
 
@@ -100,7 +127,6 @@
     border-bottom: solid 2px #fff;
 
 }
-
 
 
 h3 {
@@ -166,7 +192,7 @@ input[type="submit"] {
 .width-btn {
     width: 50%;
     text-align: center;
-    border-left: solid 2px #fff;
+    border-top: solid 2px #fff;
 }
 
 
@@ -206,3 +232,79 @@ input[type="submit"]:hover {
     border-top: solid 1px #fff;
     padding-top: 1em;
 }
+
+
+.like-bttn {
+    display: inline-block;
+    position: relative;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    /* margin: 0 1.5em; */
+    /* 0 on top and bottom, 1.5 left and right */
+    border-radius: 50%;
+    /* background-color: rgba(255, 255, 255, 0.5); */
+    background: none;
+    text-shadow: 0px 0px 6px white;
+
+}
+
+.like-bttn.is-liked {
+    /* text-shadow: 0px 0px 6px white; */
+    color: red
+}
+
+/* .like-bttn:hover {
+    background-color: orange;
+}
+
+.like-bttn:focus {
+    background-color: red;
+} 
+
+1130 - 145 website 
+1-245 bball and workout for the day
+245 - 5 algos and emails
+5-545 guitar
+
+
+*/
+
+
+.modal-container {
+    background: rgba(255, 255, 255, 0.5);
+    /* display: flex; */
+    width: 200px;
+    height: 200px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.the-modal-content {
+    width: 65%;
+    height: 85%;
+    background: white;
+    display: flex
+}
+
+.modal-comments {}
+
+
+
+
+
+
+
+/* flex stuff below
+    display: flex;
+   alignmenton the MAIN axis (default horizontal) 
+    justify-content: center;
+   alignmenton the CROSS axis (default vertical) 
+    align-items: center; */

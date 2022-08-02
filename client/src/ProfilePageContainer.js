@@ -65,7 +65,11 @@ function ProfilePageContainer() {
                     <h4 className="follow-stuff">Following: {user?.following_count}</h4>
                 </div>
                 {loggedInUser?.id === user?.id ? <h4 style={{ color: "white" }}>Your Posts</h4> :
-                    <button onClick={handleFollowClick}>Follow</button>}
+                    <>
+                        <button onClick={handleFollowClick}>Follow</button>
+                        <h4>Posts</h4>
+                    </>
+                }
             </div>
             {console.log('user is:', user)}
             <div className="app-posts">

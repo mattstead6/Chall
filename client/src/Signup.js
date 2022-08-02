@@ -95,43 +95,45 @@ function Signup() {
   return (
 
     <>
-<div className='whole-form'>
-<form onSubmit={handleSignUpSubmit}>
-  <div>
-  <input type='text' placeholder='Name' name='name' value={formData.name} onChange={handleFormChange}/>
-  </div>
-  <div>
-  <input type='text' placeholder='User Name' name='username' value={formData.username} onChange={handleFormChange}/>
-  </div>
-  <div>
-  <input type='text' placeholder='Password' name='password' value={formData.password} onChange={handleFormChange}/>
-  </div>
-  <div>
-  <input type='text' placeholder='Confirm Password' name='confirm_password' value={formData.confirm_password} onChange={handleFormChange}/>
-  </div>
-  <div>
-  <button type='button' onClick={showWidget} onChange={handleFormChange} value={formData.profile_pic} name="profile_pic" >Profile Picture</button>
-  </div>
-  {formData.profile_pic}? <Avatar
+      <div className='whole-form'>
+        <form onSubmit={handleSignUpSubmit}>
+          <div className='sign-up-container'>
+            <div>
+              <input className='sign-up' type='text' placeholder='Name' name='name' value={formData.name} onChange={handleFormChange} />
+            </div>
+            <div>
+              <input className='sign-up' type='text' placeholder='User Name' name='username' value={formData.username} onChange={handleFormChange} />
+            </div>
+            <div>
+              <input className='sign-up' type='text' placeholder='Password' name='password' value={formData.password} onChange={handleFormChange} />
+            </div>
+            <div>
+              <input className='sign-up' type='text' placeholder='Confirm Password' name='confirm_password' value={formData.confirm_password} onChange={handleFormChange} />
+            </div>
+          </div>
+          <div>
+            <button type='button' onClick={showWidget} onChange={handleFormChange} value={formData.profile_pic} name="profile_pic" >Profile Picture</button>
+          </div>
+          {formData.profile_pic}? <Avatar
             className="post-avsadfasdfasdfdsatar"
             alt='profile_pic'
             src={formData.profile_pic} />
-          : null 
-  <div>
-  <button className='bttn' type='button' onClick={() => navigateTo('/login')}>Already have an account</button>
-  </div>
-  <div>
-  <input className='bttn' type="submit" value="Submit"/>
-  </div>
-  <div>
-  <label>I have read and agree to the terms and conditions 
-  <input type="checkbox" />
-  <span></span>
-</label>
-</div>
-<a href='nba.com'>Terms And Conditions</a>
-</form>
-</div>
+          : null
+          <div>
+            <button className='bttn' type='button' onClick={() => navigateTo('/login')}>Already have an account</button>
+          </div>
+          <div>
+            <input className='bttn' type="submit" value="Submit" />
+          </div>
+          <div>
+            <label>I have read and agree to the terms and conditions
+              <input type="checkbox" />
+              <span></span>
+            </label>
+          </div>
+          <a href='nba.com'>Terms And Conditions</a>
+        </form>
+      </div>
     </>
   )
 }

@@ -1,11 +1,29 @@
-input[type=text] {
-     padding: 16px;
-    margin: 16px;
-    border: 0;
-    border-radius: 30px;
-    width: 40%;
+/* input[type=text] {
+  padding: 16px;
+  margin: 16px; */
+/* border: 0; */
+/* border-radius: 30px; */
+/* width: 40%; */
 
+/* border-bottom: 2px black; */
+
+/* } */
+
+.sign-up-container {
+  padding: 10px;
+  align-items: baseline;
 }
+
+.sign-up {
+  /* border: 0; */
+  padding: 0.9em;
+  margin: 1px;
+  width: 40%;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
 
 
 /* container */
@@ -14,6 +32,7 @@ label {
   /* to contain absolute elements */
   padding-left: 30px;
   cursor: pointer;
+
 }
 
 /* hide default checkbox  */
@@ -84,8 +103,7 @@ label input:checked~span:after {
   opacity: 1;
   transition: all 500ms ease;
   font-weight: 600;
-  padding: 12px;
-  margin: 19px;
+
 }
 
 .bttn:hover {
@@ -93,5 +111,6 @@ label input:checked~span:after {
 }
 
 .whole-form {
-  padding: 10px
+  padding: 10px;
+  background-color: white;
 }

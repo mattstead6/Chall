@@ -3,13 +3,16 @@ import { UserContext } from "./context/user"
 import { useNavigate } from "react-router-dom";
 import './Home.css'
 import { Avatar } from '@mui/material';
+import ChallengeBrief from './ChallengeBrief';
+import Modal from './Modal'
+
 
 function Home({ challengeDescription, challengeName, postID, caption, category, video, challengeID, userID, setSelectedChallenge }) {
 
 
 
   let navigate = useNavigate()
-  const [user] = useContext(UserContext)
+  const [user, setUser] = useContext(UserContext)
   const [postedUser, setPostedUser] = useState({
     profile_pic: '',
     username: ''
@@ -17,8 +20,15 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
   const [newComment, setNewComment] = useState([])
   const [comments, setComments] = useState();
   const [likes, setLikes] = useState();
+  const [liked, setLiked] = useState(false)
+  const [modal, setModal] = useState(false)
 
-
+  useEffect(() => {
+    const liked = user.likes.find(eachLike => eachLike.post_id === postID)
+    if (liked) {
+      setLiked(true)
+    }
+  }, [user.id])
 
   const fetchComments = () => {
     fetch(`/comments/by-post-id/${postID}`)
@@ -88,25 +98,58 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
       .catch(error => console.log(error.message));
   }
 
+
+  // psudo code
+
+  // if not liked already, 
+  // create like in data base
+  // if already liked, 
+  //remove like in data base
+
   function handleLike(e) {
     e.preventDefault()
-    fetch(`/likes`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        user_id: user.id,
-        post_id: postID
+    setLiked(!liked)
+    console.log(user.likes)
+    if (!liked) {
+      fetch(`/likes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          user_id: user.id,
+          post_id: postID
+        })
       })
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        fetchLikes(); // re-fetch likes
-      })
-      .catch(error => console.log(error.message));
+        .then(res => res.json())
+        .then(newLike => {
+          setUser({ ...user, likes: [...user.likes, newLike] })
+          // console.log(data);
+          fetchLikes(); // re-fetch likes
+        })
+        .catch(error => console.log(error.message))
+    }
+    else {
+
+      const userLikeForThisPost = user.likes.find(eachLike => eachLike.post_id === postID)
+      if (userLikeForThisPost) {
+        fetch(`/likes/${userLikeForThisPost.id}`, {
+          method: "DELETE"
+        })
+          .then(() => {
+            const filteredLikes = user.likes.filter(eachLike => eachLike.id !== userLikeForThisPost.id)
+            setUser({ ...user, likes: filteredLikes })
+            fetchLikes();
+          })
+          .catch(error => console.log(error.message));
+      }
+    }
+  }
+
+  function handleViewComments() {
+    setModal(true)
+    // <ChallengeBrief />
   }
 
 
@@ -122,45 +165,38 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
             src={postedUser.profile_pic} />
           <div className='the-user-name'>{postedUser.username}</div>
         </div>
-        <div className="challenge-and-description">
-          <h3>
-            {challengeName}
-          </h3>
-          <h5 className='chal-descrip'>Challenge Description</h5>
-          <h2 className='chall-description'>
-            {challengeDescription}
-          </h2>
-
-
-
-        </div>
-        <div className="see-profile">
-          <div className="width-btn">
-            <button className="btn btn-white" onClick={handleGoToProfile}>See User Profile</button>
+        <ChallengeBrief video={video} challengeName={challengeName} challengeDescription={challengeDescription} >
+          {/* this is syntax for creating children  */}
+          <div className="see-profile">
+            <div className="width-btn">
+              <button className="btn btn-white" onClick={handleGoToProfile}>See User Profile</button>
+            </div>
+            <div className="width-btn">
+              <button className="btn btn-white" onClick={handleChallenge} >Perform this challenge</button>
+            </div>
           </div>
-          <div className="width-btn">
-            <button className="btn btn-white" onClick={handleChallenge} >Perform this challenge</button>
-          </div>
-        </div>
+        </ChallengeBrief >
 
 
 
 
-        <div>
-          <video className="post-vid" src={video} controls></video>
-        </div>
 
 
-        
-        <div className='likes'>
-          <strong >{likes?.length}</strong> likes
+
+
+
+        <div className="heart-and-likes">
+          <strong className='likes' >{likes?.length} likes</strong>
+          <button className={`like-bttn ${liked ? `is-liked` : ``}`} onClick={handleLike}>♥</button>
         </div>
         <div className="post-caption">
 
           <strong>{postedUser.username}</strong> {caption}
 
         </div>
+        <button onClick={handleViewComments}>View {comments?.length} Comments</button>
         <div className="post-comments">
+
           {comments?.map((comment) => (
             <p>
               <strong>{comment.user.username}</strong> {comment.actual_comment}
@@ -168,26 +204,41 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
           ))}
         </div>
 
-        <form className="commentbox">
-          <input
-            className="add-a-comment"
-            type='text'
-            placeholder="Add a comment..."
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)} />
-          <button onClick={handleLike}>Like
+        <input
+          className="add-a-comment"
+          type='text'
+          placeholder="Add a comment..."
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)} />
 
-          </button>
-          <button
+
+
+        {/* <button
             className="comment-button"
             type="submit"
             onClick={handleComment}
           >Comment
-          </button>
-        </form>
+          </button> */}
+
+      </div>
+      <div>
+        {modal && <Modal comments={comments} challengeName={challengeName} challengeDescription={challengeDescription} video={video} onClose={() => setModal(false)} />}
       </div>
 
 
+
+
+
+      {/* {modal ?
+        <div onClose={() => {
+          setModal(false)
+        }} className="modal-container">
+          <ChallengeBrief challengeName={challengeName} challengeDescription={challengeDescription} video={video}
+          />
+          <Modal />
+        </div>
+        :
+        null} */}
 
 
       {/* <FontAwesomeIcon icon={['fa', 'heart']} /> */}
