@@ -103,7 +103,8 @@
     border: none;
     width: 90%;
     padding: 10px;
-    border-top: 1px solid lightgray
+    border-top: 1px solid lightgray;
+    margin-top: 8px;
 }
 
 .comment-button {
@@ -117,7 +118,7 @@
 .post-comments {
     padding: 5px;
     color: #fff;
-    max-height: 3em;
+    max-height: 2em;
     overflow: hidden;
     /* display: left */
 }
@@ -262,10 +263,12 @@ input[type="submit"]:hover {
     background-color: red;
 } 
 
-1130 - 145 website 
-1-245 bball and workout for the day
-245 - 5 algos and emails
-5-545 guitar
+1130 - 150 website 
+2-5 bball and workout for the day
+510 - 740 algos and emails 
+740-830 guitar
+830-1030 websites (check them all and work on Chall
+1030-1130 algos and organize tutor for tomorow
 
 
 */
@@ -296,6 +299,14 @@ input[type="submit"]:hover {
 
 .modal-comments {}
 
+.view-comments-btn {
+    color: white;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 12px;
+}
 
 
 

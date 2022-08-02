@@ -194,7 +194,6 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
           <strong>{postedUser.username}</strong> {caption}
 
         </div>
-        <button onClick={handleViewComments}>View {comments?.length} Comments</button>
         <div className="post-comments">
 
           {comments?.map((comment) => (
@@ -203,6 +202,7 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
             </p>
           ))}
         </div>
+        <i className='view-comments-btn' onClick={handleViewComments}>View {comments?.length} Comments</i>
 
         <input
           className="add-a-comment"
