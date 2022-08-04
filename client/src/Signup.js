@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./context/user";
 import './Signup.css'
@@ -22,7 +22,7 @@ function Signup() {
   })
 
   const [user, setUser] = useContext(UserContext)
-  const [errors, setErrors] = useState([])
+  // const [errors, setErrors] = useState([])
   //console.log(formData)
 
   function handleFormChange(event) {
@@ -48,14 +48,14 @@ function Signup() {
           res.json().then(newUser => {
             //console.log(newUser)
             setUser(newUser)
-            setErrors(null)
+            // setErrors(null)
             navigateTo('/home')
 
           })
         } else {
           res.json().then(response => {
-            setErrors(response.errors)
-            alert(errors[0])
+            alert(response.errors[0])
+            // alert(errors[0])
 
           })
         }
@@ -111,19 +111,22 @@ function Signup() {
               <input className='sign-up' type='text' placeholder='Confirm Password' name='confirm_password' value={formData.confirm_password} onChange={handleFormChange} />
             </div>
           </div>
-          <div>
-            <button type='button' onClick={showWidget} onChange={handleFormChange} value={formData.profile_pic} name="profile_pic" >Profile Picture</button>
+          <div className="profile-pic-container">
+            <button className="profile-pic-bttn" onClick={showWidget} onChange={handleFormChange} value={formData.profile_pic} name="profile_pic" >Profile Picture</button>
+
+            {formData.profile_pic ? <> <Avatar
+              className="post-avatar-pic"
+              alt='profile_pic'
+              src={formData.profile_pic} />
+              <p className="post-avatar-pic">{formData.username}</p>
+            </>
+              : null}
           </div>
-          {formData.profile_pic}? <Avatar
-            className="post-avsadfasdfasdfdsatar"
-            alt='profile_pic'
-            src={formData.profile_pic} />
-          : null
           <div>
-            <button className='bttn' type='button' onClick={() => navigateTo('/login')}>Already have an account</button>
+            <button className='create-account-bttn' type='button' onClick={() => navigateTo('/login')}>Already have an account</button>
           </div>
           <div>
-            <input className='bttn' type="submit" value="Submit" />
+            <input className='create-account-bttn' type="submit" value="Submit" />
           </div>
           <div>
             <label>I have read and agree to the terms and conditions
@@ -131,8 +134,9 @@ function Signup() {
               <span></span>
             </label>
           </div>
-          <a href='nba.com'>Terms And Conditions</a>
+          <a href='github.com/mattstead6'>Terms And Conditions</a>
         </form>
+        {/* <h1>WELCOME TO CHALL - THE FUTURE OF SOCIAL MEDIA...</h1> */}
       </div>
     </>
   )

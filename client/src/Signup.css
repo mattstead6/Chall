@@ -24,6 +24,10 @@
   border-right: 0;
 }
 
+.sign-up:focus {
+  outline: 0;
+}
+
 
 
 /* container */
@@ -32,7 +36,7 @@ label {
   /* to contain absolute elements */
   padding-left: 30px;
   cursor: pointer;
-
+  margin-top: 20px;
 }
 
 /* hide default checkbox  */
@@ -91,26 +95,56 @@ label input:checked~span:after {
 
 /**********Button Stuff**********/
 
-.bttn {
 
-  appearance: none;
-  -webkit-appearance: none;
-  padding: 10px;
-  margin: 5px;
-  border-radius: 5px;
+.create-account-bttn {
+
+  padding: 8px;
+  margin: 10px;
   background-color: white;
-  width: 45%;
+  width: 20%;
   opacity: 1;
   transition: all 500ms ease;
-  font-weight: 600;
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 19px;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  letter-spacing: 3px;
+
 
 }
 
-.bttn:hover {
+.create-account-bttn:hover {
   opacity: 0.5;
 }
 
+
+
 .whole-form {
-  padding: 10px;
+  padding: 62px;
   background-color: white;
+}
+
+
+
+.profile-pic-bttn {
+  background-color: black;
+  text-decoration: none;
+  color: white;
+  border-radius: 10%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: 15px;
+
+}
+
+.profile-pic-container {
+  display: flex
+}
+
+.post-avatar-pic {
+  margin-left: 25px;
+  justify-content: center;
+  margin-top: 35px;
 }

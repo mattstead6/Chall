@@ -54,25 +54,42 @@ function ProfilePageContainer() {
 
             <div className="profile-container" >
 
-                <h1 className="user-name" >
+                <h1>
                     <Avatar
                         alt='profile-pic'
-                        src={user?.profile_pic} />
+                        src={user?.profile_pic}
+                        className='profile-pic-on-profile-page' />
                     {user?.name}</h1>
+            </div>
 
-                <div className='follow-container'>
-                    <h4 className="follow-stuff">Followers: {user?.followers_count}</h4>
-                    <h4 className="follow-stuff">Following: {user?.following_count}</h4>
+            <div className='follow-container'>
+                <h4 className="follow-stuff">followers: {user?.followers_count}</h4>
+                <div className='bio-profile-page'>
+                    <h4>Bio</h4>
+                    <p>Hey my name is asdfjashdfjoasd fashdfasdf asdf asdf</p>
                 </div>
+                <h4 className="follow-stuff">following: {user?.following_count}</h4>
+                {/* <div className='bio-profile-page'>
+                        <h4>Bio</h4>
+                    </div> */}
+
+
+            </div>
+
+
+
+            <div>
                 {loggedInUser?.id === user?.id ? <h4 style={{ color: "white" }}>Your Posts</h4> :
                     <>
-                        <button onClick={handleFollowClick}>Follow</button>
+                        <button className='follow-bttn' onClick={handleFollowClick}>Follow</button>
                         <h4>Posts</h4>
                     </>
                 }
             </div>
+
             {console.log('user is:', user)}
-            <div className="app-posts">
+
+            <div className="persons-posts-on-profile">
                 {user?.posts.map(post =>
                     <ProfilePage
                         key={post.challenge_id}
@@ -84,7 +101,6 @@ function ProfilePageContainer() {
                         challengeDescription={post.challenge.challenge_description}
                         postID={post.id}
                     />
-
                 )}
             </div>
         </>

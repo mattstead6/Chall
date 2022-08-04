@@ -34,12 +34,16 @@ function App() {
 
 
 
-  // const [challengeData, setChallengeData] = useState({
-  //   video: '',
-  //   challenge_description: '',
-  //   category: '',
-  //   challenge_name: ''
-  // })
+  function handleLogout() {
+
+    fetch(`logout/`, {
+      method: "DELETE"
+    })
+      .catch(error => console.log(error.message))
+      .then(navigateTo('/'))
+
+  }
+
 
   useEffect(() => {
     fetch(`/me`)
@@ -206,6 +210,7 @@ function App() {
                 <Nav.Link href="/challenge">Submit a Challenge</Nav.Link>
                 <Nav.Link href="/home">Feed</Nav.Link>
                 <Nav.Link href={`/users/${user.id}`}>Profile</Nav.Link>
+                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
 
               </Nav>
             </Container>

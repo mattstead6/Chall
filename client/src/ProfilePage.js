@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "./context/user"
 // import './ProfilePage.css'
+import Modal from "./Modal";
 import './Home.css'
 
 
@@ -12,6 +13,7 @@ function ProfilePage({ video, caption, category, user, challengeName, challengeD
   const [newComment, setNewComment] = useState([])
   const [comments, setComments] = useState();
   const [likes, setLikes] = useState();
+  const [modal, setModal] = useState(false)
 
 
 
@@ -92,78 +94,86 @@ function ProfilePage({ video, caption, category, user, challengeName, challengeD
 
   // console.log(comments.length)
 
+  function handleOpenVideo() {
+    setModal(true)
+  }
+
 
   return (
-
-
     <>
-      <div className="post">
-        <div className='post-header'>
-          <div className="challenge-and-description">
-         
-            <div className='"challenge-and-description"'>
-            <h3>
-              {challengeName}
-            </h3>
-            <h5 className='chal-descrip'>Challenge Description</h5>
-            <h2 className='chall-description'>
-            {challengeDescription}
-          </h2>
-            </div>
-          
-            {/* <h4>
-              {category}
-            </h4> */}
-          </div>
-        </div>
-
-
-        <div>
-        <video className="post-vid" src={video} controls></video>
-        </div>
-        {/* <h3>
-          {caption}
-        </h3> */}
-
-     
-
-      <div className='likes'>
-        <strong >{likes?.length}</strong> likes
-      </div>
-      <div className="post-caption">
-        <strong>{user.username}</strong> {caption}
-      </div>
       <div>
-
-      </div>
-      <div className="post-comments">
-        {/* <p>View all {comments.length}</p> */}
-        {comments?.map((comment) => (
-          <p>
-            <strong>{comment.user.username}</strong> {comment.actual_comment}
-          </p>
-        ))}
+        <video onClick={handleOpenVideo} className='each-video-on-profile-pages' src={video}></video>
       </div>
 
-      <form className="commentbox">
-        <input
-          className="add-a-comment"
-          type='text'
-          placeholder="Add a comment..."
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)} />
-        <button onClick={handleLike}>Like
-
-        </button>
-        <button
-          className="comment-button"
-          type="submit"
-          onClick={handleComment}
-        >Comment
-        </button>
-      </form>
-      </div>
+      {modal && <Modal comments={comments} challengeName={challengeName} challengeDescription={challengeDescription} video={video} onClose={() => setModal(false)} />}
     </>
+
+
+
+    // <>
+    //   <div className="post">
+    //     <div className='post-header'>
+    //       <div className="challenge-and-description">
+
+    //         <div className='"challenge-and-description"'>
+    //         <h3>
+    //           {challengeName}
+    //         </h3>
+    //         <h5 className='chal-descrip'>Challenge Description</h5>
+    //         <h2 className='chall-description'>
+    //         {challengeDescription}
+    //       </h2>
+    //         </div>
+
+
+    //       </div>
+    //     </div>
+
+
+    //     <div>
+    //     <video className="post-vid" src={video} controls></video>
+    //     </div>
+
+
+
+
+    //   <div className='likes'>
+    //     <strong >{likes?.length}</strong> likes
+    //   </div>
+    //   <div className="post-caption">
+    //     <strong>{user.username}</strong> {caption}
+    //   </div>
+    //   <div>
+
+    //   </div>
+    //   <div className="post-comments">
+
+    //     {comments?.map((comment) => (
+    //       <p>
+    //         <strong>{comment.user.username}</strong> {comment.actual_comment}
+    //       </p>
+    //     ))}
+    //   </div>
+
+    //   <form className="commentbox">
+    //     <input
+    //       className="add-a-comment"
+    //       type='text'
+    //       placeholder="Add a comment..."
+    //       value={newComment}
+    //       onChange={(e) => setNewComment(e.target.value)} />
+    //     <button onClick={handleLike}>Like
+
+    //     </button>
+    //     <button
+    //       className="comment-button"
+    //       type="submit"
+    //       onClick={handleComment}
+    //     >Comment
+    //     </button>
+    //   </form>
+    //   </div>
+    // </>
   )
 }
 
