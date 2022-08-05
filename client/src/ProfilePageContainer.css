@@ -13,9 +13,3 @@
     text-align: center; */
     color: white;
 }
-
-.profile-container {
-    /* text-align: center; */
-    display: grid;
-    justify-content: center;
-}

@@ -11,9 +11,9 @@ function ChallengeBrief({ challengeName, challengeDescription, video, children }
                 {challengeDescription}
             </h2>
             {children || null}
-            <div>
-                <video className="post-vid" src={video} controls></video>
-            </div>
+            {/* <div> */}
+            <video className="post-vid" src={video} controls></video>
+            {/* </div> */}
         </div>
 
     )

@@ -53,39 +53,39 @@ function ProfilePageContainer() {
 
 
             <div className="profile-container" >
+                <div className='left-side'>
+                    {/* <div className='left-profile-pic-and-name'> */}
 
-                <h1>
                     <Avatar
                         alt='profile-pic'
                         src={user?.profile_pic}
                         className='profile-pic-on-profile-page' />
-                    {user?.name}</h1>
-            </div>
-
-            <div className='follow-container'>
-                <h4 className="follow-stuff">followers: {user?.followers_count}</h4>
-                <div className='bio-profile-page'>
-                    <h4>Bio</h4>
-                    <p>Hey my name is asdfjashdfjoasd fashdfasdf asdf asdf</p>
+                    <h1 style={{ textAlign: 'center' }}> {user?.username} </h1>
+                    {/* </div> */}
                 </div>
-                <h4 className="follow-stuff">following: {user?.following_count}</h4>
-                {/* <div className='bio-profile-page'>
+                <div className='right-side'>
+                    <div className='follow-container'>
+
+                        {loggedInUser?.id === user?.id ? <h4 style={{ color: "white" }}>Your Posts</h4> :
+                            <>
+                                <button className='follow-bttn' onClick={handleFollowClick}>Follow</button>
+                                {/* <h4>Posts</h4> */}
+                            </>
+                        }
+                        <h4 className="follow-stuff">{user?.followers_count} followers</h4>
+                        <h4 className="follow-stuff">{user?.following_count} following</h4>
+                    </div>
+                    <div className='bio-profile-page'>
                         <h4>Bio</h4>
-                    </div> */}
+                        <p>Hey my name is asdfjashdfjoasd fashdfasdf asdf asdfasdfasdf asdf asdf asdf adsf asdf asf asdf adsf adsf ads fadsf asd fads</p>
+                    </div>
 
-
+                </div>
             </div>
 
 
 
-            <div>
-                {loggedInUser?.id === user?.id ? <h4 style={{ color: "white" }}>Your Posts</h4> :
-                    <>
-                        <button className='follow-bttn' onClick={handleFollowClick}>Follow</button>
-                        <h4>Posts</h4>
-                    </>
-                }
-            </div>
+
 
             {console.log('user is:', user)}
 

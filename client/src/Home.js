@@ -5,6 +5,7 @@ import './Home.css'
 import { Avatar } from '@mui/material';
 import ChallengeBrief from './ChallengeBrief';
 import Modal from './Modal'
+import sendpng from '../src/assets/images/send.png'
 
 
 function Home({ challengeDescription, challengeName, postID, caption, category, video, challengeID, userID, setSelectedChallenge }) {
@@ -149,7 +150,6 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
 
   function handleViewComments() {
     setModal(true)
-    // <ChallengeBrief />
   }
 
 
@@ -203,14 +203,15 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
           ))}
         </div>
         <i className='view-comments-btn' onClick={handleViewComments}>View {comments?.length} Comments</i>
-
-        <input
-          className="add-a-comment"
-          type='text'
-          placeholder="Add a comment..."
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)} />
-
+        <div className='comment-and-foto'>
+          <input
+            className="add-a-comment"
+            type='text'
+            placeholder="Add a comment..."
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)} />
+          <img onClick={handleComment} className='send-img' src={sendpng} alt='send-im' width={40} height={40} />
+        </div>
 
 
         {/* <button
@@ -222,7 +223,7 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
 
       </div>
       <div>
-        {modal && <Modal comments={comments} challengeName={challengeName} challengeDescription={challengeDescription} video={video} onClose={() => setModal(false)} />}
+        {modal && <Modal caption={caption} profilePic={postedUser.profile_pic} comments={comments} challengeName={challengeName} challengeDescription={challengeDescription} video={video} onClose={() => setModal(false)} />}
       </div>
 
 
