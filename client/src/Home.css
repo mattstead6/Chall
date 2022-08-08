@@ -31,8 +31,9 @@
 .follow-stuff {
     padding: 0.5em;
     font-size: 20px;
-    margin-left: 15px;
-    margin-top: 20px
+    /* margin-left: 15px; */
+    /* margin-top: 20px; */
+    padding-left: 31px;
 }
 
 .follow-container {
@@ -42,7 +43,7 @@
 
     color: white;
 
-    background: red;
+
 
 }
 
@@ -51,11 +52,12 @@
 }
 
 .profile-container {
-    background: lightblue;
+
     /* flex: 1; */
     display: flex;
     justify-content: center;
     padding-top: 50px;
+    color: white
 }
 
 .user-name {
@@ -420,8 +422,8 @@ websites (check them all and work on Chall
 }
 
 .left-side {
-    background: aquamarine;
-    width: 30%;
+
+    width: 20%;
 }
 
 .profile-pic-on-profile-page {
@@ -431,6 +433,13 @@ websites (check them all and work on Chall
 }
 
 .right-side {
-    background: beige;
+
     width: 30%;
+}
+
+.follow-bttn {
+    background-color: #000000;
+    color: white;
+    font-size: 18px;
+    border-radius: 50%;
 }
