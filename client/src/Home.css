@@ -82,7 +82,8 @@ align-items: center;
 
 .the-user-name {
     padding-top: 1em;
-    color: white
+    color: white;
+    cursor: pointer;
 }
 
 .contribute-to-chall {
@@ -96,6 +97,7 @@ align-items: center;
 
 .post-avatar {
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .likes {
@@ -455,4 +457,20 @@ websites (check them all and work on Chall
 
 .btn-white {
     width: 100%
+}
+
+.comments-container-for-each-comment-after-clicking-view-more-comments {
+    display: flex;
+}
+
+.actual-comment-content-area-after-pressing-view-comments {
+    margin-top: revert;
+}
+
+.more-avatar {
+    width: 70%
+}
+
+.modal-comments-content {
+    display: flex;
 }

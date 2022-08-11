@@ -100,12 +100,6 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
   }
 
 
-  // psudo code
-
-  // if not liked already, 
-  // create like in data base
-  // if already liked, 
-  //remove like in data base
 
   function handleLike(e) {
     e.preventDefault()
@@ -160,10 +154,11 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
 
         <div className="post-header">
           <Avatar
+            onClick={handleGoToProfile}
             className="post-avatar"
             alt={postedUser.username}
             src={postedUser.profile_pic} />
-          <div className='the-user-name'>{postedUser.username}</div>
+          <div onClick={handleGoToProfile} className='the-user-name'>{postedUser.username}</div>
         </div>
         <ChallengeBrief video={video} challengeName={challengeName} challengeDescription={challengeDescription} >
           {/* this is syntax for creating children  */}
@@ -199,7 +194,7 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
           {comments?.map((comment) => (
             <p>
               <strong>{comment.user.username}</strong> {comment.actual_comment}
-            </p>
+            </p> 
           ))}
         </div>
         <i className='view-comments-btn' onClick={handleViewComments}>View {comments?.length} Comments</i>
