@@ -64,8 +64,7 @@ input[type=text] {
 
 .about-to-post-video {
     display: block;
-    margin-left: 3%;
-    margin-right: auto;
+    margin: auto;
     width: 40%;
 }
 

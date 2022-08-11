@@ -12,7 +12,7 @@ import './ChallengePage.css'
 
 
 
-function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewChall, newChall }) {
+function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewChall, newChall, mode }) {
 
   let navigate = useNavigate()
 
@@ -167,10 +167,11 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
         <div className="label-form">
           <p3 className='p3element' style={{ color: "white", fontSize: "16px" }}>Start A Challenge Trend</p3>
         </div>
-        <div>
+    
           <input className='chall-name-area' type='text' placeholder='Challenge Name' name="challenge_name" onChange={handleChange}></input>
+          <div className="challenge-content"> 
           <div className="label-form">
-            <button onClick={showWidget}>Upload Video</button>
+            <button style = {{ margin: 'auto' }} onClick={showWidget}>Upload Video</button>
           </div>
         </div>
 
@@ -182,7 +183,7 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
           <textarea className='descrip-of-chall' name="challenge_description" onChange={handleChange} placeholder="Description of Challenge"></textarea>
         </div>
 
-        <div className="label-form">
+        {mode !== 'perform' && <div className="label-form">
           <select name="category" onChange={handleChange}>
             <option>Select Category</option>
             <option>Entertainment</option>
@@ -190,7 +191,7 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
             <option >Music</option>
             <option >Charity</option>
           </select>
-        </div>
+        </div>}
         <div className="labelss">
           <button className='nom-friend' onClick={handleFindFriends} color="secondary">Nominate Friends</button>
         </div>

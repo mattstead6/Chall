@@ -113,7 +113,7 @@ function PostPopularChallenge({ handlePost, challengeData, selectedChallenge, ne
       {displayClickedChallenge.caption}
       Leave a Comment */}
 
-      <ChallengePage>
+      <ChallengePage mode='perform'>
 
         {/* CAN YOU TAKE AWAY INSTEAD OF ADD THINGS TO CHILD COMPONENTS? */}
 

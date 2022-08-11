@@ -3,8 +3,8 @@
     border: 2px solid lightgray;
     margin-bottom: 45px;
     border-radius: 25px;
-    margin-left: 15em;
-    margin-right: 15em;
+    margin-left: 22em;
+    margin-right: 22em;
     padding: 14px;
 }
 
@@ -40,7 +40,7 @@
     padding-top: 55px;
     display: flex;
     margin-bottom: 20px;
-
+align-items: center;
     color: white;
 
 
@@ -415,8 +415,8 @@ websites (check them all and work on Chall
     /* right: 10; */
     /* left: 20px; */
     /* right: -100; */
-    right: 85px;
-    top: 10px;
+    right: 11.5%;
+    top: 19%;
     cursor: pointer;
 
 }
@@ -434,7 +434,7 @@ websites (check them all and work on Chall
 
 .right-side {
 
-    width: 30%;
+    width: 42%;
 }
 
 .follow-bttn {
@@ -442,4 +442,17 @@ websites (check them all and work on Chall
     color: white;
     font-size: 18px;
     border-radius: 50%;
+}
+
+.edit-profile-bttn {
+    margin-left: 12px;
+    background-color: #ababab;
+    border: none;
+    height: 3%;
+    width: 16%;
+    margin-bottom: 7px;
+}
+
+.btn-white {
+    width: 100%
 }

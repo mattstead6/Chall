@@ -13,6 +13,9 @@ function ProfilePageContainer() {
     const { id } = useParams();
     const [user, setUser] = useState(); // starts undefined
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+    const [editing, setEditing] = useState(false)
+    const [newUsername, setNewUsername] = useState('')
+    const [newBio, setNewBio] = useState('')
 
 
 
@@ -43,6 +46,14 @@ function ProfilePageContainer() {
     }
 
 
+if (!user) { 
+    return <h1>loading...</h1>
+}
+
+const handleSubmit = () => {
+console.log(newBio)
+console.log(newUsername)
+}
 
 
 
@@ -58,27 +69,44 @@ function ProfilePageContainer() {
 
                     <Avatar
                         alt='profile-pic'
-                        src={user?.profile_pic}
+                        src={user.profile_pic}
                         className='profile-pic-on-profile-page' />
-                    <h1 style={{ textAlign: 'center' }}> {user?.username} </h1>
+                    {!editing && <h1 style={{ textAlign: 'center' }}> {user.username} </h1>}
+                    {editing && (<input onChange={(e) => {
+                        setNewUsername(e.target.value)
+                    }} value={newUsername}></input>)}
                     {/* </div> */}
                 </div>
                 <div className='right-side'>
                     <div className='follow-container'>
 
-                        {loggedInUser?.id === user?.id ? <h4 style={{ color: "white" }}>Your Posts</h4> :
+                        {loggedInUser?.id === user.id ? <h4 style={{ color: "white" }}>{loggedInUser?.posts} Posts</h4> :
                             <>
                                 <button className='follow-bttn' onClick={handleFollowClick}>Follow</button>
                                 {/* <h4>Posts</h4> */}
                             </>
                         }
-                        <h4 className="follow-stuff">{user?.followers_count} followers</h4>
-                        <h4 className="follow-stuff">{user?.following_count} following</h4>
+                        <h4 className="follow-stuff">{user.followers_count} followers</h4>
+                        <h4 className="follow-stuff">{user.following_count} following</h4>
+                        <button className="edit-profile-bttn" onClick={()=> {
+                            setEditing(true)
+                            setNewBio(user.bio)
+                            setNewUsername(user.username)
+                        }}
+                            >Edit Profile</button>
                     </div>
                     <div className='bio-profile-page'>
                         <h4>Bio</h4>
-                        <p>Hey my name is asdfjashdfjoasd fashdfasdf asdf asdfasdfasdf asdf asdf asdf adsf asdf asf asdf adsf adsf ads fadsf asd fads</p>
+                        {!editing && <p>{user.bio}</p>}
+                        {editing && (<textarea onChange={(e) => {
+                            setNewBio(e.target.value)
+                        }}value={newBio}></textarea>)}
+                   
                     </div>
+                    {editing && <button onClick={() => {
+                        setEditing(false)
+                        handleSubmit()
+                    }}>Save</button>}
 
                 </div>
             </div>
