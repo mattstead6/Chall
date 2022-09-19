@@ -4,7 +4,7 @@ import ChallengeBrief from "./ChallengeBrief";
 import { Avatar } from "@mui/material";
 
 
-function Modal({ onClose, challengeName, challengeDescription, video, comments, profilePic, caption }) {
+function MyModal({ onClose, challengeName, challengeDescription, video, comments, profilePic, caption }) {
     return (
         <div className="modal-container" onClick={onClose}>
             {/* <button onClick={onClose}>X</button> */}
@@ -39,4 +39,4 @@ function Modal({ onClose, challengeName, challengeDescription, video, comments, 
     )
 }
 
-export default Modal;
+export default MyModal;

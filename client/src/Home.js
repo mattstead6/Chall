@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import './Home.css'
 import { Avatar } from '@mui/material';
 import ChallengeBrief from './ChallengeBrief';
-import Modal from './Modal'
+import MyModal from './MyModal'
 import sendpng from '../src/assets/images/send.png'
 
 
@@ -218,7 +218,7 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
 
       </div>
       <div>
-        {modal && <Modal caption={caption} profilePic={postedUser.profile_pic} comments={comments} challengeName={challengeName} challengeDescription={challengeDescription} video={video} onClose={() => setModal(false)} />}
+        {modal && <MyModal caption={caption} profilePic={postedUser.profile_pic} comments={comments} challengeName={challengeName} challengeDescription={challengeDescription} video={video} onClose={() => setModal(false)} />}
       </div>
 
 

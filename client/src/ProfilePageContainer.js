@@ -80,7 +80,7 @@ console.log(newUsername)
                 <div className='right-side'>
                     <div className='follow-container'>
 
-                        {loggedInUser?.id === user.id ? <h4 style={{ color: "white" }}>{loggedInUser?.posts} Posts</h4> :
+                        {loggedInUser?.id === user.id ? <h4 style={{ color: "white" }}>{loggedInUser?.posts.length} Posts</h4> :
                             <>
                                 <button className='follow-bttn' onClick={handleFollowClick}>Follow</button>
                                 {/* <h4>Posts</h4> */}

@@ -111,9 +111,9 @@ function Signup() {
               <input className='sign-up' type='text' placeholder='Confirm Password' name='confirm_password' value={formData.confirm_password} onChange={handleFormChange} />
             </div>
           </div>
+        
           <div className="profile-pic-container">
-            <button className="profile-pic-bttn" onClick={showWidget} onChange={handleFormChange} value={formData.profile_pic} name="profile_pic" >Profile Picture</button>
-
+          <button className="profile-pic-bttn" onClick={showWidget} onChange={handleFormChange} value={formData.profile_pic} name="profile_pic" >Profile Picture</button>
             {formData.profile_pic ? <> <Avatar
               className="post-avatar-pic"
               alt='profile_pic'
@@ -135,9 +135,11 @@ function Signup() {
             </label>
           </div>
           <a href='github.com/mattstead6'>Terms And Conditions</a>
-        </form>
+        
         {/* <h1>WELCOME TO CHALL - THE FUTURE OF SOCIAL MEDIA...</h1> */}
+        </form>
       </div>
+   
     </>
   )
 }

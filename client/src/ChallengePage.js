@@ -6,6 +6,7 @@ import PostPage from "./PostPage";
 import { Avatar } from '@mui/material';
 import Button from '@mui/material/Button';
 import Modal from "react-bootstrap/esm/Modal";
+import MyModal from './MyModal'
 import Alert from '@mui/material/Alert';
 import './ChallengePage.css'
 
@@ -22,8 +23,11 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [selectedNoms, setSelectedNoms] = useState('');
-
   const [videoURL, setVideoURL] = useState("")
+  const [counter, setCounter] = useState(100)
+  const [challengeName, setChallengeName] = useState('')
+  const [modal, setModal] = useState(false)
+
   // const [newChallenge, setnewChallenge] = useState({
   //   video: '',
   //   challenge_description: '',
@@ -59,11 +63,28 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
     widget.open()
   }
 
-  function handleChange(e) {
-    setNewChall({ ...newChall, [e.target.name]: e.target.value })
-    setNewPost({ ...newPost, [e.target.name]: e.target.value })
+  function handleTextChange(e) {
+
+  setCounter(100 - e.target.value.length)
+  setNewChall({ ...newChall, [e.target.name]: e.target.value })
+  setNewPost({ ...newPost, [e.target.name]: e.target.value })
 
   }
+
+  function handleChange(e) {
+
+    setNewChall({ ...newChall, [e.target.name]: e.target.value })
+    setNewPost({ ...newPost, [e.target.name]: e.target.value })
+ 
+  }
+
+  function handleChallengeNameChange(e) {
+    setChallengeName(e.target.value)
+    setNewChall({ ...newChall, [e.target.name]: e.target.value })
+    setNewPost({ ...newPost, [e.target.name]: e.target.value })
+ 
+  }
+ 
 
   function handleFindFriends() {
     fetch(`/users/${user.id}`)
@@ -143,6 +164,25 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
 
 
   })
+  console.log("post", newPost)
+
+  // function openPreview() {
+  
+  //   <MyModal caption={newPost.caption} profilePic={user?.profile_pic} challengeName={newPost.challenge_name} challengeDescription={newPost.challenge_description} video={newPost.video} onClose={() => setModal(false)} />
+    
+  // }
+
+
+//   const maxLength = 100;
+
+
+
+
+// $('textarea').keyup(function() {
+//   var length = $(this).val().length;
+//   var length = maxLength-length;
+//   $('#chars').text(length);
+// });
 
 
   return (
@@ -168,7 +208,10 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
           <p3 className='p3element' style={{ color: "white", fontSize: "16px" }}>Start A Challenge Trend</p3>
         </div>
     
-          <input className='chall-name-area' type='text' placeholder='Challenge Name' name="challenge_name" onChange={handleChange}></input>
+          <input className='chall-name-area' type='text' placeholder='Challenge Name' name="challenge_name" onChange={handleChallengeNameChange}></input>
+          
+           {challengeName && <p style={{color: "white", textAlign: "center"}}>{challengeName} Chall</p>} 
+
           <div className="challenge-content"> 
           <div className="label-form">
             <button style = {{ margin: 'auto' }} onClick={showWidget}>Upload Video</button>
@@ -180,7 +223,8 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
         </div>
 
         <div className="label-form">
-          <textarea className='descrip-of-chall' name="challenge_description" onChange={handleChange} placeholder="Description of Challenge"></textarea>
+          <textarea maxLength={100} className='descrip-of-chall' name="challenge_description" onChange={handleTextChange} placeholder="Description of Challenge"></textarea>
+          <p style={{color: 'white'}}>{counter} characters remaining</p>
         </div>
 
         {mode !== 'perform' && <div className="label-form">
@@ -205,7 +249,9 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
         <div className="label-form">
           <textarea name="caption" onChange={handleChange} placeholder="Post to your friends.."></textarea>
         </div>
-        <div >
+        <div style={{display: "flex"}}>
+          <button className="bttn" onClick={() => setModal(true)}>Preview</button>
+          {modal && <MyModal caption={newPost.caption} profilePic={user?.profile_pic} challengeName={newPost.challenge_name} challengeDescription={newPost.challenge_description} video={newPost.video} onClose={() => setModal(false)} />}
           <button className="bttn" onClick={handlePost}>Post</button>
         </div>
       </div>

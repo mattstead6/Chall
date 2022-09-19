@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "./context/user"
 // import './ProfilePage.css'
-import Modal from "./Modal";
+import MyModal from "./MyModal";
 import './Home.css'
 
 
@@ -105,7 +105,7 @@ function ProfilePage({ video, caption, category, user, challengeName, challengeD
         <video onClick={handleOpenVideo} className='each-video-on-profile-pages' src={video}></video>
       </div>
 
-      {modal && <Modal comments={comments} challengeName={challengeName} challengeDescription={challengeDescription} video={video} onClose={() => setModal(false)} />}
+      {modal && <MyModal comments={comments} challengeName={challengeName} challengeDescription={challengeDescription} video={video} onClose={() => setModal(false)} />}
     </>
 
 

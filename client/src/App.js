@@ -32,8 +32,6 @@ function App() {
   const [selectedChallenge, setSelectedChallenge] = useState(0)
 
 
-
-
   function handleLogout() {
 
     fetch(`logout/`, {
