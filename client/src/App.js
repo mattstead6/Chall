@@ -82,7 +82,7 @@ function App() {
     caption: '',
   })
 
-  
+
 
   // function handlePostSubmit(e){
   //  fetch(`/posts`, {
@@ -170,20 +170,24 @@ function App() {
 
   }, [])
 
-function handleSearchChange(e) {
-  setSearch(e.target.value)
-}
+  function handleSearchChange(e) {
+   
+    if (e.target.value === '') {
+      setSearch('')
+    }
+  }
 
-const searchedPosts = feed.filter((post) => {
-return post.challenge.challenge_description.toLowerCase().includes(search.toLowerCase())
-})
 
-function handleSearch() {
-  setFeed(searchedPosts)
-}
 
-console.log('search state is here:',search)
-console.log('searched posts are here:',searchedPosts)
+  let postsToShow = feed
+  if (search !== '') {
+    postsToShow = feed.filter((post) => {
+      return post.challenge.challenge_description.toLowerCase().includes(search.toLowerCase())
+    })
+  }
+
+  console.log('search state is here:', search)
+  // console.log('searched posts are here:', searchedPosts)
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -193,12 +197,12 @@ console.log('searched posts are here:',searchedPosts)
             <Container>
               <Navbar.Brand href="#home">Chall</Navbar.Brand>
               <Navbar.Brand >{user.username}</Navbar.Brand>
-              <div className="search-bar">
-            <input className="inputBox" type="text" placeholder="Search" onChange={handleSearchChange}></input>
-            <button onClick={handleSearch}>
-              Search
-            </button>
-              </div>    
+              <form onSubmit={(e) => {
+                e.preventDefault()
+                setSearch(e.target.search.value)
+              }} className="search-bar">
+                <input name='search' className="inputBox" type="text" placeholder="Search" onChange={handleSearchChange}></input>                
+              </form>
               <Nav>
                 <Nav.Link href="/challenge">Submit a Challenge</Nav.Link>
                 <Nav.Link href="/home">Feed</Nav.Link>
@@ -213,10 +217,10 @@ console.log('searched posts are here:',searchedPosts)
         <Routes>
           <Route path="/" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/home" element={<HomeContainer setProfileFeed={setProfileFeed} setSelectedChallenge={setSelectedChallenge} setFeed={setFeed} feed={feed} />} />
+          <Route path="/home" element={<HomeContainer setProfileFeed={setProfileFeed} setSelectedChallenge={setSelectedChallenge} setFeed={setFeed} feed={postsToShow} />} />
           <Route path="/challenge" element={<ChallengePage handlePost={handlePost} newPost={newPost} setNewPost={setNewPost} newChall={newChall} setNewChall={setNewChall} />} />
           <Route path="/challenges/:id/post/:name" element={<PostPage newPost={newPost} />} />
-          <Route path="/challenges/:id/contribute-post/:id" element={<PostPopularChallenge handlePost={handlePost} selectedChallenge={selectedChallenge} feed={feed} setNewChall={setNewChall} newChall={newChall} newPost={newPost} setNewPost={setNewPost} />} />
+          <Route path="/challenges/:id/contribute-post/:id" element={<PostPopularChallenge handlePost={handlePost} selectedChallenge={selectedChallenge} feed={postsToShow} setNewChall={setNewChall} newChall={newChall} newPost={newPost} setNewPost={setNewPost} />} />
           <Route path="/users/:id" element={<ProfilePage />} />
         </Routes>
       </div>

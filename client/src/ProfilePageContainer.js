@@ -69,11 +69,11 @@ console.log(following)
             .catch(error => console.log(error.message));
     }
 
-    // function handleUnfollowClick() {
-    //     fetch(`follows/${}`, {
-    //         method: "DELETE"
-    //     })
-    // }
+    function handleUnfollowClick() {
+        fetch(`follows/${id}`, {
+            method: "DELETE"
+        })
+    }
 
 
 
@@ -118,7 +118,7 @@ console.log(following)
                             {following ? 
                              <button className='follow-bttn' onClick={handleFollowClick}>Follow</button>
                              :
-                             <button className='follow-bttn' onClick={handleFollowClick}>Unfollow</button>
+                             <button className='follow-bttn' onClick={handleUnfollowClick}>Unfollow</button>
                             }
                              
                                 {/* <h4>Posts</h4> */}

@@ -8,7 +8,6 @@ class UsersController < ApplicationController
 
 
 
-
     # STAYING LOGGED IN
 
     def show
