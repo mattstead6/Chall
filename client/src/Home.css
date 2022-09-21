@@ -52,12 +52,17 @@ align-items: center;
 }
 
 .profile-container {
-
-    /* flex: 1; */
-    display: flex;
     justify-content: center;
     padding-top: 50px;
     color: white
+}
+
+.profile-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    box-shadow: rgba(255, 255, 255, 0.35) 0px -50px 36px -28px inset;
 }
 
 .user-name {
@@ -126,6 +131,7 @@ align-items: center;
     /* display: flex; */
     flex: 1;
     border: none;
+    border-radius: 30px;
     width: 100%;
     padding: 10px;
     border-top: 1px solid lightgray;
@@ -420,8 +426,8 @@ websites (check them all and work on Chall
     right: 0.5%;
     top: 19%;
     cursor: pointer;
-
 }
+
 
 .left-side {
 
@@ -475,3 +481,7 @@ websites (check them all and work on Chall
     display: flex;
 }
 
+
+.video-on-profile-page-container {
+
+}

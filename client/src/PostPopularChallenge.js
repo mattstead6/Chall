@@ -75,6 +75,15 @@ function PostPopularChallenge({ handlePost, challengeData, selectedChallenge, ne
   const dc = displayClickedChallenge.challenge
   return (
     <>
+    <div className='contribute-to-chall'>
+  <h1 >Contribute to this Chall</h1>
+  <h5>see below for origin of chall</h5>
+  </div>
+<ChallengePage mode='perform'>
+
+{/* CAN YOU TAKE AWAY INSTEAD OF ADD THINGS TO CHILD COMPONENTS? */}
+
+</ChallengePage>
 
 
       <div className="profile-pic">
@@ -95,7 +104,7 @@ function PostPopularChallenge({ handlePost, challengeData, selectedChallenge, ne
           <h2 style={{ color: "white" }}>Challenge Selected</h2>
         </ChallengeBrief>
       </div>
-      <h1 className='contribute-to-chall'>Contribute to this Chall</h1>
+  
       {/* {originalChallenge.category}
 
       {originalChallenge.caption}
@@ -112,12 +121,6 @@ function PostPopularChallenge({ handlePost, challengeData, selectedChallenge, ne
 
       {displayClickedChallenge.caption}
       Leave a Comment */}
-
-      <ChallengePage mode='perform'>
-
-        {/* CAN YOU TAKE AWAY INSTEAD OF ADD THINGS TO CHILD COMPONENTS? */}
-
-      </ChallengePage>
 
 
 

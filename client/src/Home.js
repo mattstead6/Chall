@@ -23,6 +23,7 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
   const [likes, setLikes] = useState();
   const [liked, setLiked] = useState(false)
   const [modal, setModal] = useState(false)
+  
 
   useEffect(() => {
     const liked = user.likes.find(eachLike => eachLike.post_id === postID)
@@ -218,7 +219,7 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
 
       </div>
       <div>
-        {modal && <MyModal caption={caption} profilePic={postedUser.profile_pic} comments={comments} challengeName={challengeName} challengeDescription={challengeDescription} video={video} onClose={() => setModal(false)} />}
+        {modal && <MyModal newComment={newComment} setNewComment={setNewComment} handleComment={handleComment} caption={caption} profilePic={postedUser.profile_pic} comments={comments} challengeName={challengeName} challengeDescription={challengeDescription} video={video} onClose={() => setModal(false)} />}
       </div>
 
 

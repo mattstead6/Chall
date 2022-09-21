@@ -2,12 +2,13 @@ import React from "react";
 import './Home.css';
 import ChallengeBrief from "./ChallengeBrief";
 import { Avatar } from "@mui/material";
+import sendpng from '../src/assets/images/send.png'
 
 
-function MyModal({ onClose, challengeName, challengeDescription, video, comments, profilePic, caption }) {
+function MyModal({ onClose, challengeName, challengeDescription, video, comments, profilePic, caption, setNewComment, handleComment, newComment }) {
     return (
         <div className="modal-container" onClick={onClose}>
-            {/* <button onClick={onClose}>X</button> */}
+            <button onClick={onClose}>X</button>
             <div className='the-modal-content' onClick={(e) => {
                 e.stopPropagation();
             }}>
@@ -32,7 +33,16 @@ function MyModal({ onClose, challengeName, challengeDescription, video, comments
                         </p>
                         </div>
                     ))}
-                   
+                   <div className='comment-and-foto'>
+          <input
+            className="add-a-comment"
+            type='text'
+            placeholder="Add a comment..."
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+             />
+          <img onClick={handleComment} className='send-img' src={sendpng} alt='send-im' width={40} height={40} />
+        </div>
                 </div>
             </div>
         </div>

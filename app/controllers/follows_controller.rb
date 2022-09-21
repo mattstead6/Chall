@@ -1,6 +1,16 @@
 class FollowsController < ApplicationController
 
-    # POST /follows
+    def index 
+        follow = Follow.all
+        render json: follow
+    end
+
+    def show
+        follow = Follow.find(params[:id])
+        render json: follow
+    end
+
+# POST /follows
     def create
         newFollow = Follow.create(follow_params)
         render json: newFollow

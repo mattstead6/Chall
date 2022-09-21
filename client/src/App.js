@@ -30,6 +30,7 @@ function App() {
   const [feed, setFeed] = useState([])
   const [profileFeed, setProfileFeed] = useState([])
   const [selectedChallenge, setSelectedChallenge] = useState(0)
+  const [search, setSearch] = useState('')
 
 
   function handleLogout() {
@@ -41,7 +42,6 @@ function App() {
       .then(navigateTo('/'))
 
   }
-
 
   useEffect(() => {
     fetch(`/me`)
@@ -71,8 +71,7 @@ function App() {
   })
 
 
-
-  // STATE FOR A POST ON THE CHALLENGEPAGE
+  // STATE FOR A POST 
   const [newPost, setNewPost] = useState({
     challenge_id: 0,
     user_id: user.id,
@@ -81,23 +80,9 @@ function App() {
     category: '',
     challenge_name: '',
     caption: '',
-    //challenge: newChall
   })
 
-  //console.log(newPost)
-
-
-
-
-  // // STATE FOR A POST 
-  // const [newPost, setNewPost] = useState({
-  //   id: 0,
-  //   user_id: 0,
-  //   video: '',
-  //   challenge_description: '',
-  //   category: '',
-  //   challenge_name: ''
-  // })
+  
 
   // function handlePostSubmit(e){
   //  fetch(`/posts`, {
@@ -122,13 +107,7 @@ function App() {
 
   // }
 
-  // console.log(newChall)
 
-  // function handleViewPost() {
-
-  // }
-
-  // console.log(newPost)
   function handlePost(e) {
     e.preventDefault()
     fetch(`/challenges`, {
@@ -191,10 +170,20 @@ function App() {
 
   }, [])
 
-  // console.log(newPost)
-  // console.log(newChall)
-  console.log(feed)
+function handleSearchChange(e) {
+  setSearch(e.target.value)
+}
 
+const searchedPosts = feed.filter((post) => {
+return post.challenge.challenge_description.toLowerCase().includes(search.toLowerCase())
+})
+
+function handleSearch() {
+  setFeed(searchedPosts)
+}
+
+console.log('search state is here:',search)
+console.log('searched posts are here:',searchedPosts)
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -204,6 +193,12 @@ function App() {
             <Container>
               <Navbar.Brand href="#home">Chall</Navbar.Brand>
               <Navbar.Brand >{user.username}</Navbar.Brand>
+              <div className="search-bar">
+            <input className="inputBox" type="text" placeholder="Search" onChange={handleSearchChange}></input>
+            <button onClick={handleSearch}>
+              Search
+            </button>
+              </div>    
               <Nav>
                 <Nav.Link href="/challenge">Submit a Challenge</Nav.Link>
                 <Nav.Link href="/home">Feed</Nav.Link>

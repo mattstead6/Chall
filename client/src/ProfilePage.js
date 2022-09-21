@@ -101,7 +101,7 @@ function ProfilePage({ video, caption, category, user, challengeName, challengeD
 
   return (
     <>
-      <div>
+      <div className="video-on-profile-page-container">
         <video onClick={handleOpenVideo} className='each-video-on-profile-pages' src={video}></video>
       </div>
 

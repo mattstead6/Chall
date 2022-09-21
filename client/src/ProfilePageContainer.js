@@ -16,6 +16,8 @@ function ProfilePageContainer() {
     const [editing, setEditing] = useState(false)
     const [newUsername, setNewUsername] = useState('')
     const [newBio, setNewBio] = useState('')
+    // const [followingArray, setFollowingArray] = useState([]);
+    const [following, setFollowing] = useState() // starts undefined
 
 
 
@@ -27,6 +29,28 @@ function ProfilePageContainer() {
             .then(resp => resp.json())
             .then(respJSON => setUser(respJSON))
     }, [])
+
+    // useEffect(() => {
+    //     fetch(`/users/${loggedInUser}`)
+    //     .then(resp => resp.json())
+    //     .then(data => {
+    //         const myFollowArr = data.followings
+    //         console.log(myFollowArr)
+    //         for (let i = 0; i < myFollowArr.length; i++) {
+    //             if (myFollowArr[i].id === user.id) {
+    //                 setFollowing(true);
+    //                 return; 
+    //             }
+    //         }
+    //         for (let follow of myFollowArr) {
+    //             if (follow.id === user.id) {
+    //                 setFollowing(true);
+    //             }
+    //         }
+    //     })
+    // }, [])
+
+console.log(following)  
 
     const handleFollowClick = () => {
         fetch(`/follows`, {
@@ -45,15 +69,23 @@ function ProfilePageContainer() {
             .catch(error => console.log(error.message));
     }
 
+    // function handleUnfollowClick() {
+    //     fetch(`follows/${}`, {
+    //         method: "DELETE"
+    //     })
+    // }
 
-if (!user) { 
-    return <h1>loading...</h1>
-}
 
-const handleSubmit = () => {
-console.log(newBio)
-console.log(newUsername)
-}
+
+
+    if (!user) {
+        return <h1>loading...</h1>
+    }
+
+    const handleSubmit = () => {
+        console.log(newBio)
+        console.log(newUsername)
+    }
 
 
 
@@ -64,6 +96,7 @@ console.log(newUsername)
 
 
             <div className="profile-container" >
+                <div className="profile-content">
                 <div className='left-side'>
                     {/* <div className='left-profile-pic-and-name'> */}
 
@@ -82,26 +115,31 @@ console.log(newUsername)
 
                         {loggedInUser?.id === user.id ? <h4 style={{ color: "white" }}>{loggedInUser?.posts.length} Posts</h4> :
                             <>
-                                <button className='follow-bttn' onClick={handleFollowClick}>Follow</button>
+                            {following ? 
+                             <button className='follow-bttn' onClick={handleFollowClick}>Follow</button>
+                             :
+                             <button className='follow-bttn' onClick={handleFollowClick}>Unfollow</button>
+                            }
+                             
                                 {/* <h4>Posts</h4> */}
                             </>
                         }
                         <h4 className="follow-stuff">{user.followers_count} followers</h4>
                         <h4 className="follow-stuff">{user.following_count} following</h4>
-                        <button className="edit-profile-bttn" onClick={()=> {
+                        <button className="edit-profile-bttn" onClick={() => {
                             setEditing(true)
                             setNewBio(user.bio)
                             setNewUsername(user.username)
                         }}
-                            >Edit Profile</button>
+                        >Edit Profile</button>
                     </div>
                     <div className='bio-profile-page'>
                         <h4>Bio</h4>
                         {!editing && <p>{user.bio}</p>}
                         {editing && (<textarea onChange={(e) => {
                             setNewBio(e.target.value)
-                        }}value={newBio}></textarea>)}
-                   
+                        }} value={newBio}></textarea>)}
+
                     </div>
                     {editing && <button onClick={() => {
                         setEditing(false)
@@ -109,13 +147,8 @@ console.log(newUsername)
                     }}>Save</button>}
 
                 </div>
+                </div>
             </div>
-
-
-
-
-
-            {console.log('user is:', user)}
 
             <div className="persons-posts-on-profile">
                 {user?.posts.map(post =>
