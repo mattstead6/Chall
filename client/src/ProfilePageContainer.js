@@ -17,40 +17,40 @@ function ProfilePageContainer() {
     const [newUsername, setNewUsername] = useState('')
     const [newBio, setNewBio] = useState('')
     // const [followingArray, setFollowingArray] = useState([]);
-    const [following, setFollowing] = useState() // starts undefined
+    const [following, setFollowing] = useState(false) // starts undefined
 
+// console.log(following)
 
-
-    // console.log('persons profile im on user-ID:', user.id);
-    // console.log(`logged in persons id:`, loggedInUser.id)
+    // console.log('persons profile im on user-ID:', user?.id);
+    //  console.log(`logged in persons id:`, loggedInUser.id)
 
     useEffect(() => {
         fetch(`/show2/${id}`)
             .then(resp => resp.json())
             .then(respJSON => setUser(respJSON))
     }, [])
+    
+    useEffect(() => {
+        if (user) {
+            console.log('logged in:',loggedInUser)
+            console.log('user:',user)
+            const foundUser = loggedInUser.followings.find((following) => {
+                return following.id === user.id
+            })
+            if (foundUser) {
+                setFollowing(true)
+            }
+        }
+       
+    }, [user])
 
-    // useEffect(() => {
-    //     fetch(`/users/${loggedInUser}`)
-    //     .then(resp => resp.json())
-    //     .then(data => {
-    //         const myFollowArr = data.followings
-    //         console.log(myFollowArr)
-    //         for (let i = 0; i < myFollowArr.length; i++) {
-    //             if (myFollowArr[i].id === user.id) {
-    //                 setFollowing(true);
-    //                 return; 
-    //             }
-    //         }
-    //         for (let follow of myFollowArr) {
-    //             if (follow.id === user.id) {
-    //                 setFollowing(true);
-    //             }
-    //         }
-    //     })
-    // }, [])
+    // sends http request (study http)
+    // signal to the internet to a server 
 
-console.log(following)  
+
+
+console.log('am I following',following)  
+console.log('the user here is', user)
 
     const handleFollowClick = () => {
         fetch(`/follows`, {
@@ -66,14 +66,19 @@ console.log(following)
         })
             .then(res => res.json())
             .then(data => console.log(data))
+            .then(() => setFollowing(true))
             .catch(error => console.log(error.message));
     }
 
     function handleUnfollowClick() {
-        fetch(`follows/${id}`, {
+        fetch(`/follows/${id}`, {
             method: "DELETE"
         })
+        .then(() => setFollowing(false))
+        .catch(error => console.log(error.message))
     }
+
+
 
 
 
@@ -83,8 +88,12 @@ console.log(following)
     }
 
     const handleSubmit = () => {
-        console.log(newBio)
-        console.log(newUsername)
+        console.log('this is the new bio',newBio)
+        console.log('this is the new user',newUsername)
+        console.log(user)
+            setUser({...user, bio: newBio}) 
+            setUser({...user, username: newUsername})
+            
     }
 
 
@@ -115,7 +124,7 @@ console.log(following)
 
                         {loggedInUser?.id === user.id ? <h4 style={{ color: "white" }}>{loggedInUser?.posts.length} Posts</h4> :
                             <>
-                            {following ? 
+                            {!following ? 
                              <button className='follow-bttn' onClick={handleFollowClick}>Follow</button>
                              :
                              <button className='follow-bttn' onClick={handleUnfollowClick}>Unfollow</button>

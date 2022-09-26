@@ -13,7 +13,7 @@ import './ChallengePage.css'
 
 
 
-function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewChall, newChall, mode }) {
+function ChallengePage({ newPost, setNewPost, handlePost, setNewChall, newChall, mode }) {
 
   let navigate = useNavigate()
 
@@ -28,15 +28,6 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
   const [challengeName, setChallengeName] = useState('')
   const [modal, setModal] = useState(false)
 
-  // const [newChallenge, setnewChallenge] = useState({
-  //   video: '',
-  //   challenge_description: '',
-  //   category: '',
-  //   challenge_name: ''
-  // })
-
-  // console.log(newChallenge)
-  // console.log(user)
 
   function showWidget() {
 
@@ -52,7 +43,9 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
           if (result.info.resource_type === "video") {
             console.log(result)
             setVideoURL(result.info.secure_url)
-            setNewChall({ ...newChall, video: result.info.secure_url })
+            if (mode !== 'contribute') {
+              setNewChall({ ...newChall, video: result.info.secure_url })
+            }
             setNewPost({ ...newPost, video: result.info.secure_url })
           }
           else {
@@ -65,26 +58,28 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
 
   function handleTextChange(e) {
 
-  setCounter(100 - e.target.value.length)
-  setNewChall({ ...newChall, [e.target.name]: e.target.value })
-  setNewPost({ ...newPost, [e.target.name]: e.target.value })
+    setCounter(100 - e.target.value.length)
+    setNewChall({ ...newChall, [e.target.name]: e.target.value })
+    setNewPost({ ...newPost, [e.target.name]: e.target.value })
 
   }
 
   function handleChange(e) {
 
-    setNewChall({ ...newChall, [e.target.name]: e.target.value })
+    if (mode !== 'contribute') {
+      setNewChall({ ...newChall, [e.target.name]: e.target.value })
+    }
     setNewPost({ ...newPost, [e.target.name]: e.target.value })
- 
+
   }
 
   function handleChallengeNameChange(e) {
     setChallengeName(e.target.value)
     setNewChall({ ...newChall, [e.target.name]: e.target.value })
     setNewPost({ ...newPost, [e.target.name]: e.target.value })
- 
+
   }
- 
+
 
   function handleFindFriends() {
     fetch(`/users/${user.id}`)
@@ -167,22 +162,22 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
   console.log("post", newPost)
 
   // function openPreview() {
-  
+
   //   <MyModal caption={newPost.caption} profilePic={user?.profile_pic} challengeName={newPost.challenge_name} challengeDescription={newPost.challenge_description} video={newPost.video} onClose={() => setModal(false)} />
-    
+
   // }
 
 
-//   const maxLength = 100;
+  //   const maxLength = 100;
 
 
 
 
-// $('textarea').keyup(function() {
-//   var length = $(this).val().length;
-//   var length = maxLength-length;
-//   $('#chars').text(length);
-// });
+  // $('textarea').keyup(function() {
+  //   var length = $(this).val().length;
+  //   var length = maxLength-length;
+  //   $('#chars').text(length);
+  // });
 
 
   return (
@@ -204,17 +199,17 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
         </Modal.Footer>
       </Modal>
       <div className='challenge-container'>
-        <div className="label-form">
+        {mode !== 'contribute' && <div className="label-form">
           <p3 className='p3element' style={{ color: "white", fontSize: "16px" }}>Start A Challenge Trend</p3>
-        </div>
-    
-          <input className='chall-name-area' type='text' placeholder='Challenge Name' name="challenge_name" onChange={handleChallengeNameChange}></input>
-          
-           {challengeName && <p style={{color: "white", textAlign: "center"}}>{challengeName} Chall</p>} 
+        </div>}
 
-          <div className="challenge-content"> 
+        {mode !== 'contribute' && <input className='chall-name-area' type='text' placeholder='Challenge Name' name="challenge_name" onChange={handleChallengeNameChange}></input>}
+
+        {challengeName && <p style={{ color: "white", textAlign: "center" }}>{challengeName} Chall</p>}
+
+        <div className="challenge-content">
           <div className="label-form">
-            <button style = {{ margin: 'auto' }} onClick={showWidget}>Upload Video</button>
+            <button style={{ margin: 'auto' }} onClick={showWidget}>Upload Video</button>
           </div>
         </div>
 
@@ -222,12 +217,12 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
           {videoURL && <video className='about-to-post-video' src={videoURL} controls></video>}
         </div>
 
-        <div className="label-form">
+        {mode !== 'contribute' && <div className="label-form">
           <textarea maxLength={100} className='descrip-of-chall' name="challenge_description" onChange={handleTextChange} placeholder="Description of Challenge"></textarea>
-          <p style={{color: 'white'}}>{counter} characters remaining</p>
-        </div>
+          <p style={{ color: 'white' }}>{counter} characters remaining</p>
+        </div>}
 
-        {mode !== 'perform' && <div className="label-form">
+        {mode !== 'contribute' && <div className="label-form">
           <select name="category" onChange={handleChange}>
             <option>Select Category</option>
             <option>Entertainment</option>
@@ -249,7 +244,7 @@ function ChallengePage({ newChallenge, newPost, setNewPost, handlePost, setNewCh
         <div className="label-form">
           <textarea name="caption" onChange={handleChange} placeholder="Post to your friends.."></textarea>
         </div>
-        <div style={{display: "flex"}}>
+        <div style={{ display: "flex" }}>
           <button className="bttn" onClick={() => setModal(true)}>Preview</button>
           {modal && <MyModal caption={newPost.caption} profilePic={user?.profile_pic} challengeName={newPost.challenge_name} challengeDescription={newPost.challenge_description} video={newPost.video} onClose={() => setModal(false)} />}
           <button className="bttn" onClick={handlePost}>Post</button>

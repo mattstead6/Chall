@@ -12,13 +12,13 @@ class FollowsController < ApplicationController
 
     def destroy
         follow = Follow.find_by(follower_id: session[:user_id], followed_user_id: params[:followed_user])
-        follow.destroy
+        follow.delete
         head :no_content
     end
 
 # POST /follows
     def create
-        newFollow = Follow.create(follow_params)
+        newFollow = Follow.create!(follow_params)
         render json: newFollow
     end
 

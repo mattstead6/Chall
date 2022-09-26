@@ -14,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
 import ProfilePage from './ProfilePageContainer';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import ProfilePageContainer from './ProfilePageContainer';
 
 const darkTheme = createTheme({
   palette: {
@@ -32,7 +33,7 @@ function App() {
   const [selectedChallenge, setSelectedChallenge] = useState(0)
   const [search, setSearch] = useState('')
 
-
+console.log(feed)
   function handleLogout() {
 
     fetch(`logout/`, {
@@ -60,7 +61,6 @@ function App() {
   }, [])
 
 
-
   // STATE FOR A CHALLENGE 
   const [newChall, setNewChall] = useState({
     user_id: user.id,
@@ -69,7 +69,6 @@ function App() {
     category: '',
     challenge_name: ''
   })
-
 
   // STATE FOR A POST 
   const [newPost, setNewPost] = useState({
@@ -163,7 +162,7 @@ function App() {
     fetch(`/posts`)
       .then(res => res.json())
       .then(data => {
-        //console.log(data)
+        console.log(data)
         setProfileFeed(data)
         setFeed(data)
       })
@@ -182,9 +181,12 @@ function App() {
   let postsToShow = feed
   if (search !== '') {
     postsToShow = feed.filter((post) => {
-      return post.challenge.challenge_description.toLowerCase().includes(search.toLowerCase())
+      const isInDescription = post.challenge.challenge_description.toLowerCase().includes(search.toLowerCase())
+      const isInTitle = post.challenge.challenge_name.toLowerCase().includes(search.toLowerCase())
+      return (isInDescription || isInTitle) 
     })
   }
+  //if posts to show is 0 say "no matches"
 
   console.log('search state is here:', search)
   // console.log('searched posts are here:', searchedPosts)
@@ -221,7 +223,7 @@ function App() {
           <Route path="/challenge" element={<ChallengePage handlePost={handlePost} newPost={newPost} setNewPost={setNewPost} newChall={newChall} setNewChall={setNewChall} />} />
           <Route path="/challenges/:id/post/:name" element={<PostPage newPost={newPost} />} />
           <Route path="/challenges/:id/contribute-post/:id" element={<PostPopularChallenge handlePost={handlePost} selectedChallenge={selectedChallenge} feed={postsToShow} setNewChall={setNewChall} newChall={newChall} newPost={newPost} setNewPost={setNewPost} />} />
-          <Route path="/users/:id" element={<ProfilePage />} />
+          <Route path="/users/:id" element={user.id ? <ProfilePageContainer /> : null} />
         </Routes>
       </div>
     </ThemeProvider>

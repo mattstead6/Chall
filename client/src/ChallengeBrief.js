@@ -1,19 +1,24 @@
-function ChallengeBrief({ challengeName, challengeDescription, video, children }) {
+function ChallengeBrief({ challengeName, challengeDescription, video, children, noTopSection }) {
+
+    let topSection = (<div>
+        <h3>
+            {challengeName}
+        </h3>
+        <h5 className='chal-descrip'>Challenge Description</h5>
+        <h2 className='chall-description'>
+            {challengeDescription}
+        </h2>
+    </div>)
+    if(noTopSection) {
+        topSection = null
+    }
     return (
 
 
         <div className="challenge-and-description">
-            <h3>
-                {challengeName}
-            </h3>
-            <h5 className='chal-descrip'>Challenge Description</h5>
-            <h2 className='chall-description'>
-                {challengeDescription}
-            </h2>
+            {topSection}
             {children || null}
-            {/* <div> */}
             <video className="post-vid" src={video} controls></video>
-            {/* </div> */}
         </div>
 
     )

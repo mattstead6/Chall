@@ -10,7 +10,7 @@ import ChallengeBrief from './ChallengeBrief'
 import ChallengePage from "./ChallengePage";
 
 
-function PostPopularChallenge({ handlePost, challengeData, selectedChallenge, newChall, newPost, setNewChall, setNewPost }) {
+function PostPopularChallenge({ selectedChallenge, newPost, setNewPost }) {
 
 
   const [originalChallenge, setOriginalChallenge] = useState([]);
@@ -19,7 +19,7 @@ function PostPopularChallenge({ handlePost, challengeData, selectedChallenge, ne
   const [displayClickedChallenge, setDisplayClickedChallenge] = useState([])
 
   // console.log('Selected challenge', selectedChallenge)
-  // console.log('Challenge I clicked perform challenge on', originalChallenge)
+console.log('Challenge I clicked perform challenge on', originalChallenge)
 
 
   useEffect(() => {
@@ -39,51 +39,44 @@ function PostPopularChallenge({ handlePost, challengeData, selectedChallenge, ne
   }, [])
 
 
-  function handleChange(e) {
-    setNewChall({ ...newChall, [e.target.name]: e.target.value })
-    setNewPost({ ...newPost, [e.target.name]: e.target.value })
-
-  }
-
-  function showWidget() {
-
-    let widget = window.cloudinary.createUploadWidget({
-      multiple: false,
-      cloudName: `dgx9mftel`,
-      uploadPreset: `p1rynzxt`
-    },
-
-      (error, result) => {
-        if (!error && result && result.event === "success") {
-          console.log(result)
-          if (result.info.resource_type === "video") {
-            console.log(result)
-            setVideoURL(result.info.secure_url)
-            setNewChall({ ...newChall, video: result.info.secure_url })
-            setNewPost({ ...newPost, video: result.info.secure_url })
-          }
-          else {
-            return alert('Please select a video')
-          }
-        }
-      });
-    widget.open()
-  }
-
-  console.log(displayClickedChallenge)
-
   const dc = displayClickedChallenge.challenge
+  console.log('new post is:',newPost)
+
+  const submitContributingPost = async() => {
+      const dataForServer = {
+        caption: newPost.caption,
+        video: newPost.video,
+        user_id: newPost.user_id,
+        challenge_name: originalChallenge.challenge_name,
+        challenge_description: originalChallenge.challenge_description,
+        challenge_id: originalChallenge.id,
+        category: originalChallenge.category
+      };
+      const res = await fetch(`/posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify(
+          dataForServer
+        )
+      })
+      const data = await res.json()
+      console.log('response from server:',data)
+  }
+
   return (
     <>
-    <div className='contribute-to-chall'>
-  <h1 >Contribute to this Chall</h1>
-  <h5>see below for origin of chall</h5>
-  </div>
-<ChallengePage mode='perform'>
+      <div className='contribute-to-chall'>
+        <h1 >Contribute to this Chall</h1>
+        <h5>see below for origin of chall</h5>
+      </div>
+      <ChallengePage mode='contribute' newPost={newPost} setNewPost={setNewPost} handlePost={submitContributingPost}>
 
-{/* CAN YOU TAKE AWAY INSTEAD OF ADD THINGS TO CHILD COMPONENTS? */}
+        {/* CAN YOU TAKE AWAY INSTEAD OF ADD THINGS TO CHILD COMPONENTS? */}
 
-</ChallengePage>
+      </ChallengePage>
 
 
       <div className="profile-pic">
@@ -97,14 +90,14 @@ function PostPopularChallenge({ handlePost, challengeData, selectedChallenge, ne
       </div>
       <div className="previous-challenges">
 
-        <ChallengeBrief video={originalChallenge.video} challengeName={originalChallenge.challenge_name} challengeDescription={originalChallenge.challenge_description}>
+        <ChallengeBrief noTopSection={true} video={originalChallenge.video} challengeName={originalChallenge.challenge_name} challengeDescription={originalChallenge.challenge_description}>
           <h2 style={{ color: "white" }}>Challenge Created By</h2>
         </ChallengeBrief>
-        <ChallengeBrief video={displayClickedChallenge.video} challengeName={dc?.challenge_name} challengeDescription={dc?.challenge_description}>
+        <ChallengeBrief noTopSection={true} video={displayClickedChallenge.video} challengeName={dc?.challenge_name} challengeDescription={dc?.challenge_description}>
           <h2 style={{ color: "white" }}>Challenge Selected</h2>
         </ChallengeBrief>
       </div>
-  
+
       {/* {originalChallenge.category}
 
       {originalChallenge.caption}

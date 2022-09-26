@@ -14,35 +14,37 @@ function MyModal({ onClose, challengeName, challengeDescription, video, comments
             }}>
                 <ChallengeBrief challengeDescription={challengeDescription} challengeName={challengeName} video={video} />
                 <div className="modal-comments">
-                    <div className="modal-comments-content">
-                    <Avatar
-                        className="post-avatar"
-                        alt='profile-pic'
-                        src={profilePic} />
-                    <p>{caption}</p>
-                    </div>
-                    {comments?.map((comment) => (
-                        <div className="comments-container-for-each-comment-after-clicking-view-more-comments">
-                        <Avatar
-                        className="post-avatar"
-                        id='more-avatar'
-                        alt='profile-pic'
-                        src={comment.user.profile_pic} />
-                        <p className="actual-comment-content-area-after-pressing-view-comments">
-                            <strong>{comment.user.username}</strong> {comment.actual_comment}
-                        </p>
+                    <div className="scrollable-comments">
+                        <div className="modal-comments-content">
+                            <Avatar
+                                className="post-avatar"
+                                alt='profile-pic'
+                                src={profilePic} />
+                            <p>{caption}</p>
                         </div>
-                    ))}
-                   <div className='comment-and-foto'>
-          <input
-            className="add-a-comment"
-            type='text'
-            placeholder="Add a comment..."
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-             />
-          <img onClick={handleComment} className='send-img' src={sendpng} alt='send-im' width={40} height={40} />
-        </div>
+                        {comments?.map((comment) => (
+                            <div className="comments-container-for-each-comment-after-clicking-view-more-comments">
+                                <Avatar
+                                    className="post-avatar"
+                                    id='more-avatar'
+                                    alt='profile-pic'
+                                    src={comment.user.profile_pic} />
+                                <p className="actual-comment-content-area-after-pressing-view-comments">
+                                    <strong>{comment.user.username}</strong> {comment.actual_comment}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                    <div className='comment-and-foto'>
+                        <input
+                            className="add-a-comment"
+                            type='text'
+                            placeholder="Add a comment..."
+                            value={newComment}
+                            onChange={(e) => setNewComment(e.target.value)}
+                        />
+                        <img onClick={handleComment} className='send-img' src={sendpng} alt='send-im' width={40} height={40} />
+                    </div>
                 </div>
             </div>
         </div>
