@@ -81,6 +81,9 @@ test:
 #
 production:
   <<: *default
+  url: postgres://veeqdzenhnxbml:ff6bc0d371ebe0b4fc7a88788f044ed585bd3e18c030f8108d31d6116c5e6f6c@ec2-44-199-9-102.compute-1.amazonaws.com:5432/d54bu4d9iq14sf
   database: react_rails_api_project_template_production
-  username: react_rails_api_project_template
-  password: <%= ENV['REACT_RAILS_API_PROJECT_TEMPLATE_DATABASE_PASSWORD'] %>
+  #username: react_rails_api_project_template
+  #password: <%= ENV['REACT_RAILS_API_PROJECT_TEMPLATE_DATABASE_PASSWORD'] %>
+
+
