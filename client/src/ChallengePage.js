@@ -247,7 +247,23 @@ function ChallengePage({ newPost, setNewPost, handlePost, setNewChall, newChall,
         <div style={{ display: "flex" }}>
           <button className="bttn" onClick={() => setModal(true)}>Preview</button>
           {modal && <MyModal caption={newPost.caption} profilePic={user?.profile_pic} challengeName={newPost.challenge_name} challengeDescription={newPost.challenge_description} video={newPost.video} onClose={() => setModal(false)} />}
-          <button className="bttn" onClick={handlePost}>Post</button>
+          <button className="bttn" onClick={(e) => {
+            e.preventDefault()
+            let errorString = ''
+            let nameFilledOut = newPost.challenge_name !== ''
+            let descriptionFilledOut = newPost.challenge_description !== ''
+            if (!nameFilledOut) {
+              errorString += 'Fill out Challenge Name'
+            } 
+            if (!descriptionFilledOut) {
+              errorString += '\nFill out Description of Chall'
+            }
+            if (errorString === '') {
+              handlePost()
+            } else {
+              alert(errorString)
+            }
+          }}>Post</button>
         </div>
       </div>
     </>

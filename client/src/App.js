@@ -107,8 +107,7 @@ console.log(feed)
   // }
 
 
-  function handlePost(e) {
-    e.preventDefault()
+  function handlePost() {
     fetch(`/challenges`, {
       method: "POST",
       headers: {
@@ -152,7 +151,6 @@ console.log(feed)
       .then(data => setFeed([...feed, data]))
       .then(() => navigateTo('/home'))
       .catch(error => console.error(error))
-
   }
 
   //console.log("the feed is here:", feed)

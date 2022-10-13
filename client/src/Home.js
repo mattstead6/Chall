@@ -174,6 +174,16 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
         </ChallengeBrief >
 
 
+        {/* 
+        1. breaking a problem down into a smaller part -- we have to repeat challenge brief in different areas of our code
+              re-usage of components; modualize my components by using ChallengeBrief which is then being brought in here
+        2. using props.children to customize what goes into ChallengeBrief
+
+        -- allows us to break our problem into small parts and combine those parts
+        
+        */}
+
+
 
 
 
