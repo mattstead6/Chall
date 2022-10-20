@@ -158,7 +158,6 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
           <div onClick={handleGoToProfile} className='the-user-name'>{postedUser.username}</div>
         </div>
         <ChallengeBrief video={video} challengeName={challengeName} challengeDescription={challengeDescription} >
-          {/* this is syntax for creating children  */}
           <div className="see-profile">
             <div className="width-btn">
               <button className="btn btn-white" onClick={handleGoToProfile}>See User Profile</button>
