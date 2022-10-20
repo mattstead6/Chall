@@ -5,7 +5,7 @@
     border-radius: 25px;
     margin-left: 22em;
     margin-right: 22em;
-    padding: 14px;
+    padding: 8px;
 }
 
 .previous-challenges {
@@ -29,8 +29,6 @@
 .follow-stuff {
     padding: 0.5em;
     font-size: 20px;
-    /* margin-left: 15px; */
-    /* margin-top: 20px; */
     padding-left: 31px;
 }
 
@@ -38,11 +36,8 @@
     padding-top: 55px;
     display: flex;
     margin-bottom: 20px;
-align-items: center;
+    align-items: center;
     color: white;
-
-
-
 }
 
 .bio-profile-page {
@@ -79,8 +74,6 @@ align-items: center;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
-
-
 }
 
 .the-user-name {
@@ -139,22 +132,18 @@ align-items: center;
     flex: 0;
     border: 10px white;
     color: #fff;
-
 }
-
 
 .post-comments {
     padding: 5px;
     color: #fff;
     max-height: 2em;
     overflow: hidden;
-    /* display: left */
 }
 
 .see-profile {
     display: flex;
     border-bottom: solid 2px #fff;
-
 }
 
 
@@ -171,8 +160,6 @@ h3 {
 
 .chal-descrip {
     color: white;
-
-
 }
 
 .chall-description {
@@ -186,36 +173,9 @@ h3 {
 }
 
 .challenge-and-description {
-    /* border-bottom: solid 3px #fff; */
     background: black;
     width: 100%
 }
-
-
-
-
-
-
-
-/* .btn,
-input[type="submit"] {
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 12px;
-    line-height: 19px;
-    text-transform: uppercase;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    letter-spacing: 3px;
-    border: solid 2px #fff;
-    -webkit-transition: all .4s ease-in-out;
-    -moz-transition: all .4s ease-in-out;
-    -ms-transition: all .4s ease-in-out;
-    -o-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
-    grid-template-columns: 1fr 1fr;
-    width: 100%
-} */
 
 
 .width-btn {
@@ -269,51 +229,18 @@ input[type="submit"]:hover {
     font-size: 30px;
     cursor: pointer;
     border: none;
-    /* margin: 0 1.5em; */
-    /* 0 on top and bottom, 1.5 left and right */
     border-radius: 50%;
-    /* background-color: rgba(255, 255, 255, 0.5); */
     background: none;
     text-shadow: 0px 0px 6px white;
-
 }
 
 .like-bttn.is-liked {
-    /* text-shadow: 0px 0px 6px white; */
     color: red
 }
-
-/* .like-bttn:hover {
-    background-color: orange;
-}
-
-.like-bttn:focus {
-    background-color: red;
-} 
-
-1130 - 150 website 
-2-5 bball and workout for the day
-510 - 620 algos
-620-740 nap
-8 - 910 algos
-935 - 1035
-
-
-
-40 algos and emails 
-740-830 guitar
-830-915
-
-websites (check them all and work on Chall
-1030-1130 algos and organize tutor for tomorow
-
-
-*/
 
 
 .modal-container {
     background: rgba(255, 255, 255, 0.5);
-    /* display: flex; */
     width: 200px;
     height: 200px;
     position: fixed;
@@ -330,10 +257,7 @@ websites (check them all and work on Chall
 .the-modal-content {
     width: 80%;
     height: 85%;
-    /* max-height: 77%; */
     background: white;
-    /* display: grid; */
-    /* grid-template-columns: 700px 100px; */
     display: flex;
 }
 
@@ -342,12 +266,11 @@ websites (check them all and work on Chall
     flex-direction: column;
     justify-content: space-between;
     padding: 30px;
-  
     width: 40%;
 }
 
 .modal-comments .add-a-comment {
-    background-color: red;
+    /* background-color: red; */
 }
 
 .scrollable-comments {
@@ -364,43 +287,11 @@ websites (check them all and work on Chall
 }
 
 
-
-
-
-
-/* flex stuff below
-    display: flex;
-   alignmenton the MAIN axis (default horizontal) 
-    justify-content: center;
-   alignmenton the CROSS axis (default vertical) 
-    align-items: center; */
-
-
-
-
-
-/* HERE IS THE PROFILE PIC CONTAINER AREA */
-
-
 .profile-pic-on-profile-page {
     height: 225px !important;
     width: 225px !important;
 }
 
-
-/* PROFILE PAGE ORGANIZEING IT INTO THREE PER LINE*/
-
-/* .profile-page-video-container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-basis: 33.333333%;
-
-    margin-left: 50px
-}
-
-.post-vid-for-profile {
-   
-} */
 
 .app-posts {
     padding: 20px;
@@ -408,7 +299,7 @@ websites (check them all and work on Chall
 
 .persons-posts-on-profile {
     width: 62vw;
-    margin: 1px auto;
+    margin: 30px auto;
     display: flex;
     flex-wrap: wrap;
 }
@@ -416,10 +307,12 @@ websites (check them all and work on Chall
 .video-on-profile-page-container {
     width: 33%;
     padding: 15px 20px;
-} 
+}
 
 .each-video-on-profile-pages {
-width: 100%;
+    width: 100%;
+    height: 92%;
+    cursor: pointer;
 }
 
 
@@ -429,9 +322,6 @@ width: 100%;
 
 .send-img {
     position: absolute;
-    /* right: 10; */
-    /* left: 20px; */
-    /* right: -100; */
     right: 0.5%;
     top: 19%;
     cursor: pointer;
@@ -439,13 +329,11 @@ width: 100%;
 
 
 .left-side {
-
     width: 20%;
 }
 
 .profile-pic-on-profile-page {
     justify-content: center;
-    /* align-items: center; */
     margin: 0 auto;
 }
 
@@ -490,7 +378,40 @@ width: 100%;
     display: flex;
 }
 
+.nominate {
 
-.video-on-profile-page-container {
+    padding: 8px;
+    margin: 10px;
+    background-color: white;
+    opacity: 1;
+    transition: all 500ms ease;
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 19px;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    letter-spacing: 3px;
 
+
+}
+
+.nominate:hover {
+    opacity: 0.5;
+}
+
+.user-to-chall-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+}
+
+.friend-nom {
+    margin-right: 50%;
+    margin-top: auto;
+}
+
+.user-to-chall-container .make-green {
+    background-color: green;
 }

@@ -23,7 +23,7 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
   const [likes, setLikes] = useState();
   const [liked, setLiked] = useState(false)
   const [modal, setModal] = useState(false)
-  
+
 
   useEffect(() => {
     const liked = user.likes.find(eachLike => eachLike.post_id === postID)
@@ -36,14 +36,12 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
     fetch(`/comments/by-post-id/${postID}`)
       .then(res => res.json())
       .then(data => setComments(data))
-    //.then(console.log(comments));
   }
 
   const fetchLikes = () => {
     fetch(`/likes/by-post-id/${postID}`)
       .then(res => res.json())
       .then(data => setLikes(data))
-    //.then(console.log(likes));
   }
 
   /**
@@ -52,7 +50,6 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
   useEffect(() => {
     fetchComments();
   }, []);
-
 
 
   /**
@@ -121,7 +118,6 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
         .then(res => res.json())
         .then(newLike => {
           setUser({ ...user, likes: [...user.likes, newLike] })
-          // console.log(data);
           fetchLikes(); // re-fetch likes
         })
         .catch(error => console.log(error.message))
@@ -172,25 +168,6 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
             </div>
           </div>
         </ChallengeBrief >
-
-
-        {/* 
-        1. breaking a problem down into a smaller part -- we have to repeat challenge brief in different areas of our code
-              re-usage of components; modualize my components by using ChallengeBrief which is then being brought in here
-        2. using props.children to customize what goes into ChallengeBrief
-
-        -- allows us to break our problem into small parts and combine those parts
-        
-        */}
-
-
-
-
-
-
-
-
-
         <div className="heart-and-likes">
           <strong className='likes' >{likes?.length} likes</strong>
           <button className={`like-bttn ${liked ? `is-liked` : ``}`} onClick={handleLike}>♥</button>
@@ -205,7 +182,7 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
           {comments?.map((comment) => (
             <p>
               <strong>{comment.user.username}</strong> {comment.actual_comment}
-            </p> 
+            </p>
           ))}
         </div>
         <i className='view-comments-btn' onClick={handleViewComments}>View {comments?.length} Comments</i>
@@ -218,54 +195,10 @@ function Home({ challengeDescription, challengeName, postID, caption, category, 
             onChange={(e) => setNewComment(e.target.value)} />
           <img onClick={handleComment} className='send-img' src={sendpng} alt='send-im' width={40} height={40} />
         </div>
-
-
-        {/* <button
-            className="comment-button"
-            type="submit"
-            onClick={handleComment}
-          >Comment
-          </button> */}
-
       </div>
       <div>
         {modal && <MyModal newComment={newComment} setNewComment={setNewComment} handleComment={handleComment} caption={caption} profilePic={postedUser.profile_pic} comments={comments} challengeName={challengeName} challengeDescription={challengeDescription} video={video} onClose={() => setModal(false)} />}
       </div>
-
-
-
-
-
-      {/* {modal ?
-        <div onClose={() => {
-          setModal(false)
-        }} className="modal-container">
-          <ChallengeBrief challengeName={challengeName} challengeDescription={challengeDescription} video={video}
-          />
-          <Modal />
-        </div>
-        :
-        null} */}
-
-
-      {/* <FontAwesomeIcon icon={['fa', 'heart']} /> */}
-
-
-
-      {/* <ListGroup className="list-group-flush">
-              {comments?.map(comment => {
-                return (
-                  <ListGroupItem>{comment.actual_comment}</ListGroupItem>
-                )
-              })}
-            </ListGroup>
-          </Card >
-
-        </Col>
-        <Col></Col> */}
-
-      {/* </Row> */}
-
     </>
   )
 }

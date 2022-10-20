@@ -16,10 +16,25 @@ class ChallengesController < ApplicationController
        render json: challenge
     end
 
+    # def create
+    #     params[:user_id] = session[:user_id]
+    #     ActiveRecord::base.transaction do
+    #         challenge = Challenge.create!(challenge_params)
+    #         @post  = Post.create!(post_params)
+    #     end
+    #     render json: @post
+    # end
+
 
     private
 
     def challenge_params
         params.permit(:video, :challenge_description, :user_id, :category, :id, :challenge_name)
     end
+
+    # def post_params
+    #     params.permit(:video, :caption, :category, :challenge_description, :challenge_name, :user_id, :challenge_id)
+    # end
 end
+
+

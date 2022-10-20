@@ -32,8 +32,30 @@ function App() {
   const [profileFeed, setProfileFeed] = useState([])
   const [selectedChallenge, setSelectedChallenge] = useState(0)
   const [search, setSearch] = useState('')
+  // const [startOfAChallenge, setStartOfAChallenge]
 
-console.log(feed)
+  // STATE FOR A CHALLENGE 
+  const [newChall, setNewChall] = useState({
+    user_id: user.id,
+    video: '',
+    challenge_description: '',
+    category: '',
+    challenge_name: ''
+  })
+
+  // STATE FOR A POST 
+  const [newPost, setNewPost] = useState({
+    challenge_id: 0,
+    user_id: user.id,
+    video: '',
+    challenge_description: '',
+    category: '',
+    challenge_name: '',
+    caption: '',
+  })
+
+  console.log('feed', newChall)
+
   function handleLogout() {
 
     fetch(`logout/`, {
@@ -61,51 +83,7 @@ console.log(feed)
   }, [])
 
 
-  // STATE FOR A CHALLENGE 
-  const [newChall, setNewChall] = useState({
-    user_id: user.id,
-    video: '',
-    challenge_description: '',
-    category: '',
-    challenge_name: ''
-  })
-
-  // STATE FOR A POST 
-  const [newPost, setNewPost] = useState({
-    challenge_id: 0,
-    user_id: user.id,
-    video: '',
-    challenge_description: '',
-    category: '',
-    challenge_name: '',
-    caption: '',
-  })
-
-
-
-  // function handlePostSubmit(e){
-  //  fetch(`/posts`, {
-  //      method: "POST",
-  //      headers: {
-  //          "Content-Type": "application/json",
-  //          Accept: "application/json"
-  //      },
-  //      body: JSON.stringify({
-  //          newPost
-  //      })
-  //  })
-  //  .then( res => res.json())
-  //  .then( data => console.log(data))
-  //  .catch( error => console.log(error.message));
-  // }
-
-  // function handleSubmit(e){
-  //   e.preventDefault()
-  //   setNewChallenge(challengeData)
-  //   navigateTo(`/challenges/${challengeData.id}/post/${challengeData.challenge_name.split(' ').join('')}`)
-
-  // }
-
+  
 
   function handlePost() {
     fetch(`/challenges`, {
@@ -121,12 +99,10 @@ console.log(feed)
       .then(res => {
         if (res.ok) {
           return res.json().then(chall => {
-            //(chall)
             const updatedPost = { ...newPost, challenge_id: chall.id }
+            console.log('updated post maybe',updatedPost)
             setNewPost(updatedPost)
             return updatedPost
-            // setNewPost({ ...newPost, challenge: chall })
-            //console.log(newPost)
           })
         } else {
           return res.json().then(response => {
@@ -153,9 +129,6 @@ console.log(feed)
       .catch(error => console.error(error))
   }
 
-  //console.log("the feed is here:", feed)
-  //console.log("the new post is here", newPost)
-
   useEffect(() => {
     fetch(`/posts`)
       .then(res => res.json())
@@ -168,26 +141,22 @@ console.log(feed)
   }, [])
 
   function handleSearchChange(e) {
-   
+
     if (e.target.value === '') {
       setSearch('')
     }
   }
-
-
 
   let postsToShow = feed
   if (search !== '') {
     postsToShow = feed.filter((post) => {
       const isInDescription = post.challenge.challenge_description.toLowerCase().includes(search.toLowerCase())
       const isInTitle = post.challenge.challenge_name.toLowerCase().includes(search.toLowerCase())
-      return (isInDescription || isInTitle) 
+      return (isInDescription || isInTitle)
     })
   }
   //if posts to show is 0 say "no matches"
 
-  console.log('search state is here:', search)
-  // console.log('searched posts are here:', searchedPosts)
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -201,7 +170,7 @@ console.log(feed)
                 e.preventDefault()
                 setSearch(e.target.search.value)
               }} className="search-bar">
-                <input name='search' className="inputBox" type="text" placeholder="Search" onChange={handleSearchChange}></input>                
+                <input name='search' className="inputBox" type="text" placeholder="Search" onChange={handleSearchChange}></input>
               </form>
               <Nav>
                 <Nav.Link href="/challenge">Submit a Challenge</Nav.Link>

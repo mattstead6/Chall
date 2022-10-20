@@ -6,9 +6,12 @@ import sendpng from '../src/assets/images/send.png'
 
 
 function MyModal({ onClose, challengeName, challengeDescription, video, comments, profilePic, caption, setNewComment, handleComment, newComment }) {
+    
+    console.log(profilePic)
     return (
+       
         <div className="modal-container" onClick={onClose}>
-            <button onClick={onClose}>X</button>
+            {/* <button onClick={onClose}>X</button> */}
             <div className='the-modal-content' onClick={(e) => {
                 e.stopPropagation();
             }}>
@@ -23,8 +26,10 @@ function MyModal({ onClose, challengeName, challengeDescription, video, comments
                             <p>{caption}</p>
                         </div>
                         {comments?.map((comment) => (
+                            
                             <div className="comments-container-for-each-comment-after-clicking-view-more-comments">
                                 <Avatar
+                                    key={comment.id}
                                     className="post-avatar"
                                     id='more-avatar'
                                     alt='profile-pic'

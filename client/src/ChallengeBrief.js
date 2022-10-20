@@ -9,7 +9,7 @@ function ChallengeBrief({ challengeName, challengeDescription, video, children, 
             {challengeDescription}
         </h2>
     </div>)
-    if(noTopSection) {
+    if (noTopSection) {
         topSection = null
     }
     return (

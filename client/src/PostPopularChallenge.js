@@ -18,12 +18,11 @@ function PostPopularChallenge({ selectedChallenge, newPost, setNewPost }) {
   const [videoURL, setVideoURL] = useState('')
   const [displayClickedChallenge, setDisplayClickedChallenge] = useState([])
 
-  // console.log('Selected challenge', selectedChallenge)
-console.log('Challenge I clicked perform challenge on', originalChallenge)
-
+console.log(originalChallenge)
+console.log(displayClickedChallenge)
+console.log(selectedChallenge)
 
   useEffect(() => {
-    // console.log(`/challenges/${selectedChallenge}`)
     fetch(`/challenges/${selectedChallenge}`)
       .then(res => res.json())
       .then(data => setOriginalChallenge(data))
@@ -34,13 +33,11 @@ console.log('Challenge I clicked perform challenge on', originalChallenge)
     fetch(`/posts/${id}`)
       .then(res => res.json())
       .then(data => setDisplayClickedChallenge(data))
-      // .then(console.log(displayClickedChallenge))
       .catch(error => console.log(error.message));
   }, [])
 
 
   const dc = displayClickedChallenge.challenge
-  console.log('new post is:',newPost)
 
   const submitContributingPost = async() => {
       const dataForServer = {
@@ -73,9 +70,6 @@ console.log('Challenge I clicked perform challenge on', originalChallenge)
         <h5>see below for origin of chall</h5>
       </div>
       <ChallengePage mode='contribute' newPost={newPost} setNewPost={setNewPost} handlePost={submitContributingPost}>
-
-        {/* CAN YOU TAKE AWAY INSTEAD OF ADD THINGS TO CHILD COMPONENTS? */}
-
       </ChallengePage>
 
 
@@ -92,31 +86,18 @@ console.log('Challenge I clicked perform challenge on', originalChallenge)
 
         <ChallengeBrief noTopSection={true} video={originalChallenge.video} challengeName={originalChallenge.challenge_name} challengeDescription={originalChallenge.challenge_description}>
           <h2 style={{ color: "white" }}>Challenge Created By</h2>
+          {/* <p style={{ color: "white" }} >{originalChallenge.user.username}</p> */}
         </ChallengeBrief>
         <ChallengeBrief noTopSection={true} video={displayClickedChallenge.video} challengeName={dc?.challenge_name} challengeDescription={dc?.challenge_description}>
           <h2 style={{ color: "white" }}>Challenge Selected</h2>
+          {/* <p style={{ color: "white" }} >{displayClickedChallenge.user.username}</p> */}
         </ChallengeBrief>
       </div>
-
-      {/* {originalChallenge.category}
-
-      {originalChallenge.caption}
-
-      Leave a Comment */}
-
       <div className="profile-pic">
 
-        {/* <img src={originalChallenge.user.profile_pic} alt=''></img> */}
+
       </div>
-      {/* <p>This Challenge was created by: {originalChallenge.user.username}</p> */}
-
-      {/* {displayClickedChallenge.category}
-
-      {displayClickedChallenge.caption}
-      Leave a Comment */}
-
-
-
+   
     </>
   )
 }

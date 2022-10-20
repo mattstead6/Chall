@@ -11,11 +11,6 @@
     display: block;
     margin: 0px 0px 15px 20px;
     padding: 8px;
-    /* width: 80%; */
-    /* height: 5%; */
-    /* box-sizing: border-box; */
-    /* border: none; */
-    /* outline: none; */
     border-bottom: 1px solid #aaa;
     font-size: 14px;
 }
@@ -28,9 +23,9 @@
 
 .descrip-of-chall {
     width: 100%;
+    height: 120px;
     padding: 20px;
     border: 0;
-    width: 100%;
     border-bottom: 1px solid;
 }
 
@@ -52,19 +47,8 @@
 
 }
 
-/* 
-input[type=text] {
-    padding: 20px;
-    margin: 30px;
-    border: 0;
-    border-bottom: 1px solid;
-    border-radius: 3px;
-    width: 30%;
-} */
-
 .about-to-post-video {
-    display: block;
-    margin: auto;
+    margin-left: 30px;
     width: 40%;
 }
 
@@ -74,5 +58,12 @@ input[type=text] {
 
 .nominated-user {
     color: #fff;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.select {
+    position: relative;
+    bottom: 8px;
 }

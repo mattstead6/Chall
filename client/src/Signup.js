@@ -22,8 +22,7 @@ function Signup() {
   })
 
   const [user, setUser] = useContext(UserContext)
-  // const [errors, setErrors] = useState([])
-  //console.log(formData)
+
 
   function handleFormChange(event) {
     setFormData({
@@ -46,17 +45,13 @@ function Signup() {
       .then(res => {
         if (res.ok) {
           res.json().then(newUser => {
-            //console.log(newUser)
             setUser(newUser)
-            // setErrors(null)
             navigateTo('/home')
 
           })
         } else {
           res.json().then(response => {
             alert(response.errors[0])
-            // alert(errors[0])
-
           })
         }
       }
@@ -96,7 +91,7 @@ function Signup() {
 
     <>
       <div className='whole-form'>
-        <form onSubmit={handleSignUpSubmit}>
+        <form>
           <div className='sign-up-container'>
             <div>
               <input className='sign-up' type='text' placeholder='Name' name='name' value={formData.name} onChange={handleFormChange} />
@@ -122,12 +117,14 @@ function Signup() {
             </>
               : null}
           </div>
-          <div>
+
+          <div className="create-account-bttn-container">
             <button className='create-account-bttn' type='button' onClick={() => navigateTo('/login')}>Already have an account</button>
           </div>
-          <div>
-            <input className='create-account-bttn' type="submit" value="Submit" />
+          <div className="create-account-bttn-container">
+            <button onClick={handleSignUpSubmit} className='create-account-bttn' type="button">Signup</button>
           </div>
+
           <div>
             <label>I have read and agree to the terms and conditions
               <input type="checkbox" />

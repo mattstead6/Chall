@@ -4,8 +4,6 @@ import { Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { UserContext } from "./context/user"
 import ProfilePage from "./ProfilePage";
-// import './ProfilePageContainer.css'
-import './HomeContainer.css'
 import { Avatar } from '@mui/material';
 
 
@@ -16,13 +14,7 @@ function ProfilePageContainer() {
     const [editing, setEditing] = useState(false)
     const [newUsername, setNewUsername] = useState('')
     const [newBio, setNewBio] = useState('')
-    // const [followingArray, setFollowingArray] = useState([]);
     const [following, setFollowing] = useState(false) // starts undefined
-
-// console.log(following)
-
-    // console.log('persons profile im on user-ID:', user?.id);
-    //  console.log(`logged in persons id:`, loggedInUser.id)
 
     useEffect(() => {
         fetch(`/show2/${id}`)
@@ -43,10 +35,6 @@ function ProfilePageContainer() {
         }
        
     }, [user])
-
-    // sends http request (study http)
-    // signal to the internet to a server 
-
 
 
 console.log('am I following',following)  
@@ -79,10 +67,6 @@ console.log('the user here is', user)
     }
 
 
-
-
-
-
     if (!user) {
         return <h1>loading...</h1>
     }
@@ -107,7 +91,6 @@ console.log('the user here is', user)
             <div className="profile-container" >
                 <div className="profile-content">
                 <div className='left-side'>
-                    {/* <div className='left-profile-pic-and-name'> */}
 
                     <Avatar
                         alt='profile-pic'
@@ -117,7 +100,7 @@ console.log('the user here is', user)
                     {editing && (<input onChange={(e) => {
                         setNewUsername(e.target.value)
                     }} value={newUsername}></input>)}
-                    {/* </div> */}
+         
                 </div>
                 <div className='right-side'>
                     <div className='follow-container'>
@@ -130,17 +113,17 @@ console.log('the user here is', user)
                              <button className='follow-bttn' onClick={handleUnfollowClick}>Unfollow</button>
                             }
                              
-                                {/* <h4>Posts</h4> */}
+
                             </>
                         }
                         <h4 className="follow-stuff">{user.followers_count} followers</h4>
                         <h4 className="follow-stuff">{user.following_count} following</h4>
-                        <button className="edit-profile-bttn" onClick={() => {
+                        <button style={{backgroundColor: "black !important"}} className="nominate" onClick={() => {
                             setEditing(true)
                             setNewBio(user.bio)
                             setNewUsername(user.username)
                         }}
-                        >Edit Profile</button>
+                        >Edit</button>
                     </div>
                     <div className='bio-profile-page'>
                         <h4>Bio</h4>
@@ -156,9 +139,10 @@ console.log('the user here is', user)
                     }}>Save</button>}
 
                 </div>
+                
                 </div>
             </div>
-
+                    <p style={{marginLeft: '48%', marginTop: '12px'}} className="p3element">Posts</p>
             <div className="persons-posts-on-profile">
                 {user?.posts.map(post =>
                     <ProfilePage

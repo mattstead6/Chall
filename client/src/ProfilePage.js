@@ -21,14 +21,12 @@ function ProfilePage({ video, caption, category, user, challengeName, challengeD
     fetch(`/comments/by-post-id/${postID}`)
       .then(res => res.json())
       .then(data => setComments(data))
-    //.then(console.log(comments));
   }
 
   const fetchLikes = () => {
     fetch(`/likes/by-post-id/${postID}`)
       .then(res => res.json())
       .then(data => setLikes(data))
-    //.then(console.log(likes));
   }
 
   /**
@@ -105,7 +103,7 @@ function ProfilePage({ video, caption, category, user, challengeName, challengeD
         <video onClick={handleOpenVideo} className='each-video-on-profile-pages' src={video}></video>
       </div>
 
-      {modal && <MyModal comments={comments} challengeName={challengeName} challengeDescription={challengeDescription} video={video} onClose={() => setModal(false)} />}
+      {modal && <MyModal comments={comments} profilePic={user.profile_pic} caption={caption} challengeName={challengeName}  challengeDescription={challengeDescription} video={video} onClose={() => setModal(false)} />}
     </>
 
 
