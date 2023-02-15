@@ -33,19 +33,19 @@
 //     })
 
 
-//     useEffect(() => {
-//         const fetchChallenge = async () => {
-//             const resp = await fetch(`/challenges/${newChallenge.id}/post`);
-//             const respJSON = await resp.json();
-//             setChallenge(respJSON);
-//         }
-//         fetchChallenge();
-//     }, [])
+    // useEffect(() => {
+    //     const fetchChallenge = async () => {
+    //         const resp = await fetch(`/challenges/${newChallenge.id}/post`);
+    //         const respJSON = await resp.json();
+    //         setChallenge(respJSON);
+    //     }
+    //     fetchChallenge();
+    // }, [])
 
 
 //     function handleChangePostData(e) {
 //         setPostData({
-//             ...postData,
+//             ...postData,`
 //             [e.target.name]: e.target.value
 //         })
 

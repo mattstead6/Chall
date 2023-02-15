@@ -165,7 +165,7 @@ function App() {
           <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
               <Navbar.Brand href="#home">Chall</Navbar.Brand>
-              <Navbar.Brand >{user.username}</Navbar.Brand>
+              {/* <Navbar.Brand >{user.username}</Navbar.Brand> */}
               <form onSubmit={(e) => {
                 e.preventDefault()
                 setSearch(e.target.search.value)
@@ -198,3 +198,42 @@ function App() {
 }
 
 export default App;
+
+
+// import "./styles.css";
+
+// import React, { useState } from "react";
+// const App = () => {
+//   const [list, setList] = useState([]);
+//   const [name, setName] = useState("");
+
+//   console.log({list})
+
+//   const changeHandler = (e) => {
+//     setName(e.target.value);
+//   }
+
+//   const submitHandler = () => {
+//     const newList = [...list, name];
+//     setList(newList);
+//     setName("");
+//     console.log({list, name});
+//   };
+
+//   return (
+//     <div className="App">
+//       <h1> Check In </h1>
+//       <input maxLength={2} type="text" value={name} onChange={changeHandler} placeholder="Name" />
+//       <button  disabled={name.length === 0} onClick={submitHandler}>Add</button>
+//       <hr />
+//       <ul>
+//         {list.length > 0 &&
+//           list.map((item, index) => {
+//             return <li key={index}>{item}</li>;
+//           })}
+//       </ul>
+//     </div>
+//   );
+// };
+
+// export default App;
